@@ -22,38 +22,51 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Car[] cars = tp.GetCars();
             Pedestrian[] pedestrians = tp.GetPedestrians();
             Passenger[] passengers = tp.GetPassengers();
+            string[] messages = tp.GetMessages();
 
+            Console.WriteLine("Cars:");
             for (int i = 0; i < cars.Length; i++)
             {
                 Console.WriteLine(cars[i].Id);
-                Console.WriteLine(cars[i].Position);
+                Console.WriteLine(cars[i].Position.PosX + "," + passengers[i].Position.PosY);
                 Console.WriteLine(cars[i].Life);
                 Console.WriteLine(cars[i].Speed);
                 Console.WriteLine(cars[i].Direction);
                 Console.WriteLine(cars[i].NextCommand);
                 Console.WriteLine(cars[i].TransportedPedestrians);
                 Console.WriteLine(cars[i].PassengerId);
+                Console.WriteLine("-------------------------------------");
             }
 
+            Console.WriteLine("Pedestrians:");
             for (int i = 0; i < pedestrians.Length; i++)
             {
                 Console.WriteLine(pedestrians[i].Id);
-                Console.WriteLine(pedestrians[i].Position);
+                Console.WriteLine(pedestrians[i].Position.PosX + "," + passengers[i].Position.PosY);
                 Console.WriteLine(pedestrians[i].Speed);
                 Console.WriteLine(pedestrians[i].Direction);
                 Console.WriteLine(pedestrians[i].NextCommand);
-        
+                Console.WriteLine("-------------------------------------");
+
             }
 
+            Console.WriteLine("Passengers:");
             for (int i = 0; i < passengers.Length; i++)
             {
                 Console.WriteLine(passengers[i].Id);
-                Console.WriteLine(passengers[i].Position);
-                Console.WriteLine(passengers[i].DestinyPosition);
+                Console.WriteLine(passengers[i].Position.PosX + "," + passengers[i].Position.PosY);
+                Console.WriteLine(passengers[i].DestinyPosition.PosX + "," + passengers[i].DestinyPosition.PosY);
                 Console.WriteLine(passengers[i].CarId);
+                Console.WriteLine("-------------------------------------");
             }
 
-        
+            Console.WriteLine("Messages:");
+            for (int i = 0; i < messages.Length; i++)
+            {
+                Console.WriteLine(messages[i]);
+                Console.WriteLine("-------------------------------------");
+            }
+
             Console.ReadKey();
         }
     }

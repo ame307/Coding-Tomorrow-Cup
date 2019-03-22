@@ -21,14 +21,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             PosX = x;
             PosY = y;
         }
-
-        public Pos FromString(string value)
-        {
-            string[] line = value.Split(',');
-            PosX = int.Parse(line[0].Split(':')[1]);
-            PosX = int.Parse(line[1].Split(':')[1]);
-            return this;
-        }
         
     }
 }

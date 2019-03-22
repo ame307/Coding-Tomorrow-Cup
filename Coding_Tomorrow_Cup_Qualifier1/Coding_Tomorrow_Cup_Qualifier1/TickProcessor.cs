@@ -46,7 +46,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             for (int i=0;i<jsonCars.Count;i++)
             {
-                Car temp = new Car((int)jsonCars[i]["id"], new Pos().FromString((string)jsonCars[i]["pos"]), (int)jsonCars[i]["life"],
+                Car temp = new Car((int)jsonCars[i]["id"], new Pos((int)jsonCars[i]["pos"]["x"], (int)jsonCars[i]["pos"]["y"]), (int)jsonCars[i]["life"],
                 (int)jsonCars[i]["speed"], (string)jsonCars[i]["direction"], (string)jsonCars[i]["next_command"],
                 (int)jsonCars[i]["transported"], (int)jsonCars[i]["passenger_id"]);
 
@@ -63,7 +63,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             for (int i = 0; i < jsonPedestrians.Count; i++)
             {
-                Pedestrian temp = new Pedestrian((int)jsonPedestrians[i]["id"], new Pos().FromString((string)jsonPedestrians[i]["pos"]), (int)jsonPedestrians[i]["speed"],
+                Pedestrian temp = new Pedestrian((int)jsonPedestrians[i]["id"], new Pos((int)jsonPedestrians[i]["pos"]["x"], (int)jsonPedestrians[i]["pos"]["y"]), (int)jsonPedestrians[i]["speed"],
                 (string)jsonPedestrians[i]["direction"], (string)jsonPedestrians[i]["next_command"]);
 
                 pedestrians[i] = temp;
@@ -79,8 +79,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             for (int i = 0; i < jsonPassengers.Count; i++)
             {
-                Passenger temp = new Passenger((int)jsonPassengers[i]["id"], new Pos().FromString((string)jsonPassengers[i]["pos"]),
-                new Pos().FromString((string)jsonPassengers[i]["dest_pos"]), (int)jsonPassengers[i]["car_id"]);
+                Passenger temp = new Passenger((int)jsonPassengers[i]["id"], new Pos((int)jsonPassengers[i]["pos"]["x"], (int)jsonPassengers[i]["pos"]["y"]),
+                new Pos((int)jsonPassengers[i]["dest_pos"]["x"], (int)jsonPassengers[i]["dest_pos"]["y"]), (int)jsonPassengers[i]["car_id"]);
 
                 passengers[i] = temp;
             }
@@ -88,6 +88,18 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return passengers;
         }
 
+        public string[] GetMessages() 
+        {
+            JArray jsonMessages = (JArray)Tick["messages"];
+            string[] messages = new string[jsonMessages.Count];
+
+            for (int i = 0; i < jsonMessages.Count; i++)
+            {
+                messages[i] = jsonMessages[i].ToString();
+            }
+
+            return messages;
+        }
        
     }
 }
