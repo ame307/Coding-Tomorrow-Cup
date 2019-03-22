@@ -12,9 +12,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public Pos Position { get; set; }
         public int Speed { get; set; }
         public string Direction { get; set; }
-        public int NextCommand { get; set; }
+        public string NextCommand { get; set; }
 
-        public Pedestrian(int id, Pos position, int speed, string direction, int nextCommand)
+        public Pedestrian(int id, Pos position, int speed, string direction, string nextCommand)
         {
             Id = id;
             Position = position;
