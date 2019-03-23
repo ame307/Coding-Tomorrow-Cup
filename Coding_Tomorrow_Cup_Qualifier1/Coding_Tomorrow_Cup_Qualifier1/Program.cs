@@ -67,6 +67,14 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 Console.WriteLine("-------------------------------------");
             }
 
+            List<Pos> loc = Routing.GetInstance().FindRoute(28,59,28,55).ToPositions();
+
+            for(int i=0;i<loc.Count;i++)
+            {
+                Console.WriteLine(loc[i].PosX + " " + loc [i].PosY);
+            }
+           
+
             Console.ReadKey();
         }
     }

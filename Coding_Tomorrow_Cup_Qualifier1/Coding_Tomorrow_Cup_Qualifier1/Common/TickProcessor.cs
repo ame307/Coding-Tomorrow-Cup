@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Coding_Tomorrow_Cup_Qualifier1
 {
-    class TickProcessor
+    public class TickProcessor
     {
         public JObject Tick { get; set; }
                 

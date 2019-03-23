@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Coding_Tomorrow_Cup_Qualifier1
 {
-    class Pedestrian
+    public class Pedestrian
     {
         public int Id { get; set; }
         public Pos Position { get; set; }

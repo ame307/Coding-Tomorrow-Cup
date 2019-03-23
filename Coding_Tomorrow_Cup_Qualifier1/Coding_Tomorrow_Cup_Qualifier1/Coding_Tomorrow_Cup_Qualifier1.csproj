@@ -47,13 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Answer.cs" />
-    <Compile Include="Car.cs" />
-    <Compile Include="Routing.cs" />
-    <Compile Include="TickProcessor.cs" />
-    <Compile Include="Passenger.cs" />
-    <Compile Include="Pedestrian.cs" />
-    <Compile Include="Pos.cs" />
+    <Compile Include="Enum\Directions.cs" />
+    <Compile Include="Model\Response.cs" />
+    <Compile Include="Model\Car.cs" />
+    <Compile Include="Common\Routing.cs" />
+    <Compile Include="Common\TickProcessor.cs" />
+    <Compile Include="Model\Passenger.cs" />
+    <Compile Include="Model\Pedestrian.cs" />
+    <Compile Include="Common\Pos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

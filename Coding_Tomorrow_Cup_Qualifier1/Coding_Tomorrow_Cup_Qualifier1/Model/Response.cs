@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Coding_Tomorrow_Cup_Qualifier1
 {
-    class Response
+    public class Response
     {
         public int GameId { get; set; }
 
@@ -22,6 +22,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Tick = tick;
             CarId = carId;
             Command = Command;
-        }
+        }  
     }
 }

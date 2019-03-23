@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,27 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public Location Parent;
     }
 
-    class Routing
+    public class Routing
     {
-        public static List<Location> FindRoute(int StartX, int StartY, int EndX, int EndY)
+        private static Routing instance;
+
+        private List<Location> route;
+
+        public static Routing GetInstance()
+        {
+            if(instance == null)
+            {
+                instance = new Routing();
+            }
+
+            return instance;
+        }
+
+        private Routing()
+        {
+
+        }        
+        public Routing FindRoute(int StartX, int StartY, int EndX, int EndY)
         {
             string[] map = new string[]
             {
@@ -84,32 +103,23 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 "GPSSPGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGPSSPG"
             };
 
-            // algorithm
-
             Location current = null;
             var start = new Location { X = StartX, Y = StartY };
             var target = new Location { X = EndX, Y = EndY };
             var openList = new List<Location>();
             var closedList = new List<Location>();
-            List<Location> route = new List<Location>();
+            route = new List<Location>();
             int g = 0;
 
-            // start by adding the original position to the open list
             openList.Add(start);
 
             while (openList.Count > 0)
             {
-                // get the square with the lowest F score
                 var lowest = openList.Min(l => l.F);
                 current = openList.First(l => l.F == lowest);
-
-                // add the current square to the closed list
                 closedList.Add(current);
-
-                // remove it from the open list
                 openList.Remove(current);
 
-                // if we added the destination to the closed list, we've found a path
                 if (closedList.FirstOrDefault(l => l.X == target.X && l.Y == target.Y) != null)
                     break;
 
@@ -118,28 +128,22 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
                 foreach (var adjacentSquare in adjacentSquares)
                 {
-                    // if this adjacent square is already in the closed list, ignore it
                     if (closedList.FirstOrDefault(l => l.X == adjacentSquare.X
                             && l.Y == adjacentSquare.Y) != null)
                         continue;
 
-                    // if it's not in the open list...
                     if (openList.FirstOrDefault(l => l.X == adjacentSquare.X
                             && l.Y == adjacentSquare.Y) == null)
                     {
-                        // compute its score, set the parent
                         adjacentSquare.G = g;
                         adjacentSquare.H = ComputeHScore(adjacentSquare.X, adjacentSquare.Y, target.X, target.Y);
                         adjacentSquare.F = adjacentSquare.G + adjacentSquare.H;
                         adjacentSquare.Parent = current;
 
-                        // and add it to the open list
                         openList.Insert(0, adjacentSquare);
                     }
                     else
                     {
-                        // test if using the current G score makes the adjacent square's F score
-                        // lower, if yes update the parent because it means it's a better path
                         if (g + adjacentSquare.H > adjacentSquare.F)
                         {
                             adjacentSquare.G = g;
@@ -150,16 +154,16 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 }
             }
 
-            // assume path was found; let's show it
             while (current != null)
             {
                 route.Add(new Location { X = current.X, Y = current.Y });
                 current = current.Parent;
             }
-            return route;
+
+            return this;
         }
 
-        static List<Location> GetWalkableAdjacentSquares(int x, int y, string[] map)
+        private List<Location> GetWalkableAdjacentSquares(int x, int y, string[] map)
         {
             var proposedLocations = new List<Location>()
             {
@@ -186,6 +190,25 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return Math.Abs(targetX - x) + Math.Abs(targetY - y);
         }
 
+
+        public List<Pos> ToPositions()
+        {
+            List<Pos> positions = new List<Pos>();
+            for(int i=0;i<route.Count;i++)
+            {
+                Pos temp = new Pos(route[i].X, route[i].Y);
+                positions.Add(temp);
+            }
+
+            return positions;
+        }
+
+        public List<string> ToCommands(string direction)
+        {
+            List<string> commands = new List<string>();
+
+            return commands;
+        }
 
     }
 }

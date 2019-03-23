@@ -20,9 +20,7 @@ namespace AStarPathfinding
     {
         static void Main(string[] args)
         {
-
             // draw map
-
             string[] map = new string[]
             {
                 "GPSSPGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGPSSPG",
