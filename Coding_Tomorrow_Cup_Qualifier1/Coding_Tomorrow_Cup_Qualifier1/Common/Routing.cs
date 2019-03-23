@@ -17,7 +17,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public Location Parent;
     }
 
-    public class Routing
+    class Routing
     {
         private static Routing instance;
 
@@ -37,7 +37,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         {
 
         }        
-        public Routing FindRoute(int StartX, int StartY, int EndX, int EndY)
+        public List<Location> FindRoute(int StartX, int StartY, int EndX, int EndY)
         {
             string[] map = new string[]
             {
@@ -160,7 +160,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 current = current.Parent;
             }
 
-            return this;
+            return route;
         }
 
         private List<Location> GetWalkableAdjacentSquares(int x, int y, string[] map)
