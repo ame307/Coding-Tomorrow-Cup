@@ -55,3 +55,4 @@ C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qu
 C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CopyComplete
 C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.exe
 C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.pdb
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.pdb

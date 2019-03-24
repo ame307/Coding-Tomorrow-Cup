@@ -13,6 +13,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         {
 
             //Test
+            Protocol protocol = new Protocol();
+            Console.WriteLine(protocol.FirstMessageSender(FirstMessage.Firstmessage()));
+
             TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
 
             Console.WriteLine(tp.GetGameId());
@@ -70,7 +73,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Routing asd = Routing.GetInstance();
             List<Location> legrovidebbut = asd.FindRoute(2, 1, 33, 49);
 
+
+
             Response response = new Response(tp.GetGameId(), tp.GetTick(), tp.GetCarId(), "GO_LEFT");
+            Console.WriteLine(protocol.MessageSender(response));
             Console.WriteLine(response.Output(response));
             Console.ReadKey();
         }
