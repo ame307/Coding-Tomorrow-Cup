@@ -1,6 +1,9 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +11,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     public class Response
     {
+        TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
+
         public int GameId { get; set; }
 
         public int Tick { get; set; }
@@ -21,7 +26,16 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             GameId = gameId;
             Tick = tick;
             CarId = carId;
-            Command = Command;
+            Command = command;
         }  
+
+        public string Output(Response response)
+        {
+            response.GameId = tp.GetGameId();
+            response.Tick = tp.GetTick();
+            response.CarId = tp.GetCarId();
+            response.Command = Command;
+            return JsonConvert.SerializeObject(response);
+        }
     }
 }

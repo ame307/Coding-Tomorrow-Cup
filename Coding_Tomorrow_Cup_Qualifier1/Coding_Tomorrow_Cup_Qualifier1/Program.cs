@@ -69,6 +69,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             Routing asd = Routing.GetInstance();
             List<Location> legrovidebbut = asd.FindRoute(2, 1, 33, 49);
+
+            Response response = new Response(tp.GetGameId(), tp.GetTick(), tp.GetCarId(), "GO_LEFT");
+            Console.WriteLine(response.Output(response));
             Console.ReadKey();
         }
     }

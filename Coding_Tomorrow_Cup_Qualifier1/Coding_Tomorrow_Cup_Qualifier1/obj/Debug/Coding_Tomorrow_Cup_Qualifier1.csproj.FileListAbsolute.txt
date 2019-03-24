@@ -43,3 +43,15 @@ F:\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualif
 F:\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CopyComplete
 F:\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.exe
 F:\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.pdb
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Coding_Tomorrow_Cup_Qualifier1.exe.config
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Coding_Tomorrow_Cup_Qualifier1.exe
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Coding_Tomorrow_Cup_Qualifier1.pdb
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.dll
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.xml
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csprojAssemblyReference.cache
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.Properties.Resources.resources
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.GenerateResource.cache
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CoreCompileInputs.cache
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CopyComplete
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.exe
+C:\Git\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.pdb
