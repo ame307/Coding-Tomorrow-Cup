@@ -37,7 +37,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         {
 
         }        
-        public List<Location> FindRoute(int StartX, int StartY, int EndX, int EndY)
+        public Routing FindRoute(int StartX, int StartY, int EndX, int EndY)
         {
             string[] map = new string[]
             {
@@ -160,7 +160,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 current = current.Parent;
             }
 
-            return route;
+            route.Reverse();
+            return this;
         }
 
         private List<Location> GetWalkableAdjacentSquares(int x, int y, string[] map)
@@ -194,7 +195,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public List<Pos> ToPositions()
         {
             List<Pos> positions = new List<Pos>();
-            for(int i=0;i<route.Count;i++)
+            for (int i = 0; i < route.Count; i++)
             {
                 Pos temp = new Pos(route[i].X, route[i].Y);
                 positions.Add(temp);
@@ -203,11 +204,102 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return positions;
         }
 
-        public List<string> ToCommands(string direction)
+        public List<string> ToDirections()
         {
-            List<string> commands = new List<string>();
+            List<string> directions = new List<string>();
+            Direction startDirection;
+            Direction direction;
 
-            return commands;
+            if (route[0].X - route[1].X == 0)
+            {
+                if (route[0].Y < route[1].Y)
+                {
+                    startDirection = Direction.SOUTH;
+                }
+                else
+                {
+                    startDirection = Direction.NORTH;
+                }
+
+            }
+            else
+            {
+                if (route[0].X < route[1].X)
+                {
+                    startDirection = Direction.EAST;
+                }
+                else
+                {
+                    startDirection = Direction.WEST;
+                }
+            }
+
+            direction = startDirection;
+            Console.WriteLine(startDirection);
+
+            int y = 1;
+            while (y < route.Count)
+            {
+                if (route[y - 1].X != route[y].X && direction == Direction.NORTH)
+                {
+                    if (route[y - 1].X < route[y].X)
+                    {
+                        directions.Add("Fordulj jobbra");
+                        direction = Direction.EAST;
+                    }
+                    else
+                    {
+                        directions.Add("Fordulj balra");
+                        direction = Direction.WEST;
+                    }
+                }
+                else if (route[y - 1].X != route[y].X && direction == Direction.SOUTH)
+                {
+                    if (route[y - 1].X < route[y].X)
+                    {
+                        directions.Add("Fordulj balra");
+                        direction = Direction.EAST;
+                    }
+                    else
+                    {
+                        directions.Add("Fordulj jobbra");
+                        direction = Direction.WEST;
+                    }
+                }
+                else if (route[y - 1].Y != route[y].Y && direction == Direction.WEST)
+                {
+                    if (route[y - 1].Y < route[y].Y)
+                    {
+                        directions.Add("Fordulj balra");
+                        direction = Direction.SOUTH;
+                    }
+                    else
+                    {
+                        directions.Add("Fordulj jobbra");
+                        direction = Direction.NORTH;
+                    }
+                }
+                else if (route[y - 1].Y != route[y].Y && direction == Direction.EAST)
+                {
+                    if (route[y - 1].Y < route[y].Y)
+                    {
+                        directions.Add("Fordulj jobbra");
+                        direction = Direction.SOUTH;
+                    }
+                    else
+                    {
+                        directions.Add("Fordulj balra");
+                        direction = Direction.NORTH;
+                    }
+                }
+                else
+                {
+                    directions.Add("Előre");
+                    y++;
+                }
+            }
+
+            return directions;
         }
 
     }

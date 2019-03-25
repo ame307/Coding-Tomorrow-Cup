@@ -29,5 +29,11 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             TransportedPedestrians = transportedPredestrians;
             PassengerId = passengerId;
         }
+
+        public List<string> CreateCommands(List<string> directions)
+        {
+            return null;
+        }
+
     }
 }

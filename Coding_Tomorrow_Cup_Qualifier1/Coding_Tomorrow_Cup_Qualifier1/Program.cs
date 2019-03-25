@@ -12,10 +12,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         static void Main(string[] args)
         {
 
-            //Test
-            Protocol protocol = new Protocol();
-            Console.WriteLine(protocol.FirstMessageSender(FirstMessage.Firstmessage()));
-
+            /*Test
             TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
 
             Console.WriteLine(tp.GetGameId());
@@ -68,16 +65,19 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 Console.WriteLine(messages[i]);
                 Console.WriteLine("-------------------------------------");
+            }*/
+
+
+            //Car kocsi = new Car(01, new Pos(28, 56), 100, 0, ">", "0", 0, 0);
+
+
+            Routing path = Routing.GetInstance();
+            List<string> legrovidebbut = path.FindRoute(28, 56, 28, 46).ToDirections();
+            for (int i = 0; i < legrovidebbut.Count - 1; i++)
+            {
+                Console.WriteLine(legrovidebbut[i]);
             }
 
-            Routing asd = Routing.GetInstance();
-            List<Location> legrovidebbut = asd.FindRoute(2, 1, 33, 49);
-
-
-
-            Response response = new Response(tp.GetGameId(), tp.GetTick(), tp.GetCarId(), "GO_LEFT");
-            Console.WriteLine(protocol.MessageSender(response));
-            Console.WriteLine(response.Output(response));
             Console.ReadKey();
         }
     }

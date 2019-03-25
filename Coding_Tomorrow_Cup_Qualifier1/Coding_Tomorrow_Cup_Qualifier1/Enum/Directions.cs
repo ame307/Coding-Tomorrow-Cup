@@ -1,4 +1,4 @@
-﻿public enum Directons
+﻿public enum Direction
 {
     NORTH,
     SOUTH,
