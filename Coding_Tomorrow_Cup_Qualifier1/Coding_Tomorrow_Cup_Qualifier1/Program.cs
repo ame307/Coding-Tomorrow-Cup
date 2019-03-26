@@ -15,7 +15,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             /*Test
             TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
-
+            private TickProcessor tp = new TickProcessor(new Uri("http://www.facebook.com/"));
             Console.WriteLine(tp.GetGameId());
             Console.WriteLine(tp.GetTick());
             Console.WriteLine(tp.GetCarId());

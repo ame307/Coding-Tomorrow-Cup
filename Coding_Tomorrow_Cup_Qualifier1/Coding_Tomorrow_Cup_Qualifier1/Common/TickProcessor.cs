@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Net;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,13 +13,22 @@ namespace Coding_Tomorrow_Cup_Qualifier1
     public class TickProcessor
     {
         public JObject Tick { get; set; }
-                
+
+        //public TickProcessor(Uri kapotturl)
+        //{
+        //    using (WebClient wc = new WebClient())
+        //    {
+        //        var json = wc.DownloadString(kapotturl);
+        //        //string valueOrignal = Convert.ToString(json);
+        //        Tick = JObject.Parse(json);
+        //    }
+        //}
+
         public TickProcessor(string path)
         {
             StreamReader sr = System.IO.File.OpenText(path);
             string json = sr.ReadToEnd();
             Tick = JObject.Parse(json);
-
         }
 
         public int GetGameId()

@@ -12,7 +12,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
     public class Response
     {
         private  TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
-
+        //private TickProcessor tp = new TickProcessor(new Uri("http://www.facebook.com/"));
         public int GameId { get; set; }
 
         public int Tick { get; set; }
