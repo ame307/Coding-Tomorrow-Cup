@@ -246,6 +246,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     y++;
                 }
             }
+            directions.Add("Előre");
             return directions;
         }
     }
