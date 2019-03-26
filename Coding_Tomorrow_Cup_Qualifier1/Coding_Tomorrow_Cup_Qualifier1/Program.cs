@@ -73,8 +73,11 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             Routing path = Routing.GetInstance();
             List<string> legrovidebbut = path.FindRoute(28, 56, 28, 46).ToDirections();
-            for (int i = 0; i < legrovidebbut.Count - 1; i++)            
-                Console.WriteLine(legrovidebbut[i]);            
+            for (int i = 0; i < legrovidebbut.Count - 1; i++)
+            {
+                Console.WriteLine(legrovidebbut[i]);
+            }
+
             Console.ReadKey();
         }
     }
