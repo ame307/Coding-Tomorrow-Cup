@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -73,9 +74,11 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             Routing path = Routing.GetInstance();
             List<string> legrovidebbut = path.FindRoute(28, 56, 28, 46).ToDirections();
-            for (int i = 0; i < legrovidebbut.Count - 1; i++)            
-                Console.WriteLine(legrovidebbut[i]);            
+            List<string> responses = Response.GetResponseFromDirections(legrovidebbut);
+            for (int i = 0; i < responses.Count - 1; i++)
+                Console.WriteLine(responses[i]);
             Console.ReadKey();
         }
     }
+    
 }

@@ -218,12 +218,14 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 {
                     if (route[y - 1].X < route[y].X)
                     {
-                        directions.Add(direction == Direction.SOUTH ? "Fordulj balra" : "Fordulj jobbra");
+                        //directions.Add(direction == Direction.SOUTH ? "Fordulj balra" : "Fordulj jobbra");
+                        directions.Add(direction == Direction.SOUTH ? "CAR_INDEX_LEFT" : "CAR_INDEX_RIGHT");
                         direction = Direction.EAST;
                     }
                     else
                     {
-                        directions.Add(direction == Direction.NORTH ? "Fordulj balra" : "Fordulj jobbra");
+                        //directions.Add(direction == Direction.NORTH ? "Fordulj balra" : "Fordulj jobbra");
+                        directions.Add(direction == Direction.NORTH ? "CAR_INDEX_LEFT" : "CAR_INDEX_RIGHT");
                         direction = Direction.WEST;
                     }
                 }
@@ -231,12 +233,12 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 {
                     if (route[y - 1].Y < route[y].Y)
                     {
-                        directions.Add(direction == Direction.EAST ? "Fordulj jobbra" : "Fordulj balra");
+                        directions.Add(direction == Direction.EAST ? "CAR_INDEX_RIGHT" : "CAR_INDEX_LEFT");
                         direction = Direction.SOUTH;
                     }
                     else
                     {
-                        directions.Add(direction == Direction.WEST ? "Fordulj jobbra" : "Fordulj balra");
+                        directions.Add(direction == Direction.WEST ? "CAR_INDEX_RIGHT" : "CAR_INDEX_LEFT");
                         direction = Direction.NORTH;
                     }
                 }
