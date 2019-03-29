@@ -12,9 +12,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
     {
         static void Main(string[] args)
         {
-
-
-
             Protocol p = new Protocol();
             FirstMessage fm = FirstMessage.Firstmessage();
             TickProcessor tp = new TickProcessor(p.FirstMessageSender(fm));
@@ -31,6 +28,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             while(true)
             {
+                p.CheckConnection();
                 y = 0;
                 if(y >= commands.Count || commands.Count == 0)
                 {
@@ -64,18 +62,16 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
                     }
 
-                    Response  = new Response();
+                    //Response  = new Response();
 
                     y = 0;
                 }
                 else
                 {
                     y++;
-                } 
+                }
                 
             }
-
-
 
 
 

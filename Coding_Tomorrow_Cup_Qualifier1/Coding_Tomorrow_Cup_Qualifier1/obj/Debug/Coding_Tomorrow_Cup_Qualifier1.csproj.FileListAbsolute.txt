@@ -67,3 +67,16 @@ C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csprojResolveAssemblyReference.cache
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.Properties.Resources.resources
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.GenerateResource.Cache
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csprojAssemblyReference.cache
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.Properties.Resources.resources
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.GenerateResource.cache
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CoreCompileInputs.cache
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.exe
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.pdb
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Coding_Tomorrow_Cup_Qualifier1.exe.config
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Coding_Tomorrow_Cup_Qualifier1.exe
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Coding_Tomorrow_Cup_Qualifier1.pdb
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Kristóf\Documents\GitHub\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CopyComplete
