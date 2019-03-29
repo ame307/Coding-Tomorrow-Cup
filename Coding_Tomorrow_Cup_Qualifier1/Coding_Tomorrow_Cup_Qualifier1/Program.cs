@@ -58,7 +58,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }*/
             Protocol p = new Protocol();
             FirstMessage fm = FirstMessage.Firstmessage();
-            p.FirstMessageSender(fm);
+            Console.WriteLine(p.FirstMessageSender(fm));
 
             Console.ReadKey();
         }
