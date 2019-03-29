@@ -19,6 +19,13 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
         }
 
+        public Passenger(int id, Pos position, Pos destinyPostion)
+        {
+            Id = id;
+            Position = position;
+            DestinyPosition = destinyPostion;
+        }
+
         public Passenger(int id, Pos position, Pos destinyPostion, int carId)
         {
             Id = id;

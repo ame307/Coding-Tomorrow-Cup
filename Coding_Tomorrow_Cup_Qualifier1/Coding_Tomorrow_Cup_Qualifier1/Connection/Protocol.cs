@@ -7,8 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.IO;
-using System.Net.NetworkInformation;
-using System.Net;
 
 namespace Coding_Tomorrow_Cup_Qualifier1
 {
@@ -27,7 +25,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return MessageBecome(networkStream, tcpClient);
         }
 
-        public string MessageSender(JObject param)
+        public string MessageSender(string param)
         {
             streamWriter.Write(param.ToString());
             streamWriter.Flush();
@@ -50,24 +48,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 return returnValue;
             }
             return "Can't read from stream";
-        }
-
-        public string CheckConnection()
-        {
-            try
-            {
-                Ping ping = new Ping();
-                PingReply reply = ping.Send("31.46.64.35", 1000);
-                if (reply != null)
-                {
-                    return "Status: " + reply.Status + "\n Time: " + reply.RoundtripTime.ToString() + "\n Address: " + reply.Address;
-                }
-            }
-            catch
-            {
-                return "Nincs kapcsolat!";
-            }
-            return null;
         }
     }
 }

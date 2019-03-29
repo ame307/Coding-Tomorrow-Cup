@@ -11,8 +11,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     public class Response
     {
-        private  TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
-        //private TickProcessor tp = new TickProcessor(new Uri("http://www.facebook.com/"));
+        //private  TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
+        //private TickProcessor tp = new TickProcessor(new Uri("http://31.46.64.35:12323/"));
         public int GameId { get; set; }
 
         public int Tick { get; set; }
@@ -29,14 +29,14 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Command = command;
         }  
 
-        public string Output(Response response)
+        /*public string Output(Response response)
         {
             response.GameId = tp.GetGameId();
             response.Tick = tp.GetTick();
             response.CarId = tp.GetCarId();
             response.Command = Command;
             return JsonConvert.SerializeObject(response);
-        }
+        }*/
 
         public static List<string> GetResponseFromDirections(List<string> legrovidebbut)
         {
@@ -45,7 +45,18 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             for (int i = 0; i < legrovidebbut.Count; i++)
             {
                 temp = new Response(1, i + 2, 1, legrovidebbut[i]);
-                responses.Add(JsonConvert.SerializeObject(temp));
+                string valami = JsonConvert.SerializeObject(temp);
+
+                StringBuilder sb = new StringBuilder(valami);
+                for (int j = 0; j < sb.Length; j++)
+                {
+                    if(sb[i].Equals(@"\"))
+                    {
+                        sb[i] = '\0';
+                    }
+                }
+
+                responses.Add(valami);
             }
             return responses;
         }

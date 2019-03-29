@@ -18,6 +18,17 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public int TransportedPedestrians { get; set; }
         public int PassengerId { get; set; }
 
+        public Car(int id, Pos position, int life, int speed, string direction, string nextcommand, int transportedPredestrians)
+        {
+            Id = id;
+            Position = position;
+            Life = life;
+            Speed = speed;
+            Direction = direction;
+            NextCommand = nextcommand;
+            TransportedPedestrians = transportedPredestrians;
+        }
+
         public Car(int id, Pos position, int life, int speed, string direction, string nextcommand, int transportedPredestrians, int passengerId)
         {
             Id = id;
