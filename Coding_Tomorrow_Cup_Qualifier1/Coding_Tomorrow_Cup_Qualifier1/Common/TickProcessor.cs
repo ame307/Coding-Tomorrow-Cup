@@ -47,10 +47,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return (int)requestId["car_id"];
         }
 
-        public Car[] GetCars()
+        public List<Car> GetCars()
         {
             JArray jsonCars = (JArray)Tick["cars"];
-            Car[] cars = new Car[jsonCars.Count];
+            List<Car> cars = new List<Car>();
 
             for (int i=0;i<jsonCars.Count;i++)
             {
@@ -58,52 +58,52 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 (int)jsonCars[i]["speed"], (string)jsonCars[i]["direction"], (string)jsonCars[i]["next_command"],
                 (int)jsonCars[i]["transported"], (int)jsonCars[i]["passenger_id"]);
 
-                cars[i] = temp;                
+                cars.Add(temp);                
             }
 
             return cars;
         }
 
-        public Pedestrian[] GetPedestrians()
+        public List<Pedestrian> GetPedestrians()
         {
             JArray jsonPedestrians = (JArray)Tick["pedestrians"];
-            Pedestrian[] pedestrians = new Pedestrian[jsonPedestrians.Count];
+            List<Pedestrian> pedestrians = new List<Pedestrian>();
 
             for (int i = 0; i < jsonPedestrians.Count; i++)
             {
                 Pedestrian temp = new Pedestrian((int)jsonPedestrians[i]["id"], new Pos((int)jsonPedestrians[i]["pos"]["x"], (int)jsonPedestrians[i]["pos"]["y"]), (int)jsonPedestrians[i]["speed"],
                 (string)jsonPedestrians[i]["direction"], (string)jsonPedestrians[i]["next_command"]);
 
-                pedestrians[i] = temp;
+                pedestrians.Add(temp);
             }
 
             return pedestrians;
         }
 
-        public Passenger[] GetPassengers()
+        public List<Passenger> GetPassengers()
         {
             JArray jsonPassengers = (JArray)Tick["passengers"];
-            Passenger[] passengers = new Passenger[jsonPassengers.Count];
+            List<Passenger> passengers = new List<Passenger>();
 
             for (int i = 0; i < jsonPassengers.Count; i++)
             {
                 Passenger temp = new Passenger((int)jsonPassengers[i]["id"], new Pos((int)jsonPassengers[i]["pos"]["x"], (int)jsonPassengers[i]["pos"]["y"]),
                 new Pos((int)jsonPassengers[i]["dest_pos"]["x"], (int)jsonPassengers[i]["dest_pos"]["y"]), (int)jsonPassengers[i]["car_id"]);
 
-                passengers[i] = temp;
+                passengers.Add(temp);
             }
 
             return passengers;
         }
 
-        public string[] GetMessages() 
+        public List<string> GetMessages() 
         {
             JArray jsonMessages = (JArray)Tick["messages"];
-            string[] messages = new string[jsonMessages.Count];
+            List<string> messages = new List<string>();
 
             for (int i = 0; i < jsonMessages.Count; i++)
             {
-                messages[i] = jsonMessages[i].ToString();
+                messages.Add(jsonMessages[i].ToString());
             }
 
             return messages;

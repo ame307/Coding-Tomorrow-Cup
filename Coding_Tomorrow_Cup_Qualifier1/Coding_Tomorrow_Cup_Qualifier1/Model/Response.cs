@@ -29,7 +29,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Command = command;
         }  
 
-        private string Output(Response response)
+        public string Output(Response response)
         {
             response.GameId = tp.GetGameId();
             response.Tick = tp.GetTick();

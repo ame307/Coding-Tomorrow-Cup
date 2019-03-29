@@ -39,10 +39,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             switch (this.Direction)
             {
-                case "^": direction = global::Direction.NORTH.ToString(); break;
-                case "v": direction = global::Direction.SOUTH.ToString(); break;
-                case "<": direction = global::Direction.WEST.ToString(); break;
-                case ">": direction = global::Direction.EAST.ToString(); break;
+                case "UP": direction = global::Direction.NORTH.ToString(); break;
+                case "DOWN": direction = global::Direction.SOUTH.ToString(); break;
+                case "LEFT": direction = global::Direction.WEST.ToString(); break;
+                case "RIGHT": direction = global::Direction.EAST.ToString(); break;
             }
 
             if (direction == "SOUTH" && directions[0] == "NORTH" ||

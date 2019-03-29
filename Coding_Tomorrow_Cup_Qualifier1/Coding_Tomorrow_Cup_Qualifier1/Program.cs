@@ -14,38 +14,75 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         {
 
 
-            /*
-            TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
-            //private TickProcessor tp = new TickProcessor(new Uri("http://www.facebook.com/"));
-            Console.WriteLine(tp.GetGameId());
-            Console.WriteLine(tp.GetTick());
-            Console.WriteLine(tp.GetCarId());
 
-            Car[] cars = tp.GetCars();
-            Pedestrian[] pedestrians = tp.GetPedestrians();
-            Passenger[] passengers = tp.GetPassengers();
-            string[] messages = tp.GetMessages();
+            Protocol p = new Protocol();
+            FirstMessage fm = FirstMessage.Firstmessage();
+            TickProcessor tp = new TickProcessor(p.FirstMessageSender(fm));
+
+            List<Car> cars = new List<Car>();
+            List<Pedestrian> pedestrians = new List<Pedestrian>();
+            List<Passenger> passengers = new List<Passenger>();
+            List<string> messages = new List<string>();
             Routing path = Routing.GetInstance();
-            List<string> responses;
-            List<string> commands;
+            List<string> commands = new List<string>();
 
-            int nearestPassangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[0].Position.PosX, passengers[0].Position.PosY).ToPositions().Count;
-            Passenger nearestPassanger = passengers[0];
-            for (int i = 1; i < passengers.Length; i++)
+            int y;
+            bool IsFindPassanger = true;
+
+            while(true)
             {
-                int passangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[i].Position.PosX, passengers[i].Position.PosY).ToPositions().Count;
-                if (nearestPassangerDistance > passangerDistance)
+                y = 0;
+                if(y >= commands.Count || commands.Count == 0)
                 {
-                    nearestPassanger = passengers[i];
+
+                    cars = tp.GetCars();
+                    pedestrians = tp.GetPedestrians();
+                    passengers = tp.GetPassengers();
+                    messages = tp.GetMessages();
+
+                    Passenger nearestPassanger = new Passenger();
+
+                    if (IsFindPassanger)
+                    {
+                        int nearestPassangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[0].Position.PosX, passengers[0].Position.PosY).ToPositions().Count;
+                        nearestPassanger = passengers[0];
+                        for (int i = 1; i < passengers.Count; i++)
+                        {
+                            int passangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[i].Position.PosX, passengers[i].Position.PosY).ToPositions().Count;
+                            if (nearestPassangerDistance > passangerDistance)
+                            {
+                                nearestPassanger = passengers[i];
+                            }
+                        }
+
+                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
+
+                        IsFindPassanger = false;
+                    }
+                    else
+                    {
+                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
+                    }
+
+                    Response  = new Response();
+
+                    y = 0;
                 }
+                else
+                {
+                    y++;
+                } 
+                
             }
-            commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
-            responses = Response.GetResponseFromDirections(commands);
 
-            //
 
-            commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
-            responses = Response.GetResponseFromDirections(commands);*/
+
+
+
+
+
+
+
 
             /*Car car = new Car(1, new Pos(30, 46), 100, 0, ">", "NO_OP", 0, 0);
             Routing route = Routing.GetInstance();
@@ -56,9 +93,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 Console.WriteLine(responses[i]);
             }*/
-            Protocol p = new Protocol();
-            FirstMessage fm = FirstMessage.Firstmessage();
-            Console.WriteLine(p.FirstMessageSender(fm));
+
+
+
 
             Console.ReadKey();
         }
