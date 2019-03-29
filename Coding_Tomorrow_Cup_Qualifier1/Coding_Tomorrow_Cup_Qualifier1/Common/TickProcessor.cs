@@ -24,11 +24,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
         }*/
 
-        public TickProcessor(string path)
-        {
-            StreamReader sr = System.IO.File.OpenText(path);
-            string json = sr.ReadToEnd();
-            Tick = JObject.Parse(json);
+        public TickProcessor(string fromServer)
+        {           
+            Tick = JObject.Parse(fromServer);
         }
 
         public int GetGameId()

@@ -12,13 +12,41 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     class Protocol
     {
-        //private static TcpClient client = new TcpClient("127.0.0.1", 12345);
-        //private static StreamReader reader = new StreamReader(client.GetStream(), Encoding.UTF8);
-        //private static StreamWriter writer = new StreamWriter(client.GetStream(), Encoding.UTF8);
-
-        public string FirstMessageSender(FirstMessage firstmessage)
+        public void FirstMessageSender(FirstMessage firstmessage)
         {
-            return JsonConvert.SerializeObject(firstmessage.Token);
+            TcpClient tcpClient;
+            NetworkStream networkStream;
+            StreamWriter streamWriter;
+            try
+            {
+                tcpClient = new TcpClient("31.46.64.35", 12323);
+                networkStream = tcpClient.GetStream();
+                JObject token = new JObject();
+                token.Add("token", FirstMessage.Firstmessage().Token);
+                streamWriter = new StreamWriter(networkStream);
+                streamWriter.Write(token.ToString());
+                streamWriter.Flush();
+
+                if (networkStream.CanRead)
+                {
+                    byte[] bytes = new byte[tcpClient.ReceiveBufferSize];                    
+                    networkStream.Read(bytes, 0, (int)tcpClient.ReceiveBufferSize);       
+                    List<byte> realValue = new List<byte>();
+                    int i = 0;
+                    while (bytes[i] != 0) {
+                        realValue.Add(bytes[i]);
+                        i++;
+                    }
+                    string returndata = Encoding.UTF8.GetString(realValue.ToArray());
+                    TickProcessor processor = new TickProcessor(returndata);
+                    Console.WriteLine(processor.GetGameId());
+
+                }
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         public string MessageSender(Response response)

@@ -47,7 +47,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
             responses = Response.GetResponseFromDirections(commands);*/
 
-            Car car = new Car(1, new Pos(30, 46), 100, 0, ">", "NO_OP", 0, 0);
+            /*Car car = new Car(1, new Pos(30, 46), 100, 0, ">", "NO_OP", 0, 0);
             Routing route = Routing.GetInstance();
             List<string> directions = route.FindRoute(car.Position.PosX, car.Position.PosY, 31, 56).ToDirections();
             List<string> commands = car.CreateCommands(directions);
@@ -55,7 +55,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             for (int i = 0; i < responses.Count; i++)
             {
                 Console.WriteLine(responses[i]);
-            }
+            }*/
+            Protocol p = new Protocol();
+            FirstMessage fm = FirstMessage.Firstmessage();
+            p.FirstMessageSender(fm);
 
             Console.ReadKey();
         }
