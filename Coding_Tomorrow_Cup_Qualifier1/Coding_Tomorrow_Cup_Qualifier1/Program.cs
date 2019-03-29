@@ -26,50 +26,52 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             int y;
             bool IsFindPassanger = true;
 
-            while(true)
+            Console.WriteLine(p.CheckConnection());
+
+            while (true)
             {
-                p.CheckConnection();
-                y = 0;
-                if(y >= commands.Count || commands.Count == 0)
-                {
+                
+                //y = 0;
+                //if(y >= commands.Count || commands.Count == 0)
+                //{
 
-                    cars = tp.GetCars();
-                    pedestrians = tp.GetPedestrians();
-                    passengers = tp.GetPassengers();
-                    messages = tp.GetMessages();
+                //    cars = tp.GetCars();
+                //    pedestrians = tp.GetPedestrians();
+                //    passengers = tp.GetPassengers();
+                //    messages = tp.GetMessages();
 
-                    Passenger nearestPassanger = new Passenger();
+                //    Passenger nearestPassanger = new Passenger();
 
-                    if (IsFindPassanger)
-                    {
-                        int nearestPassangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[0].Position.PosX, passengers[0].Position.PosY).ToPositions().Count;
-                        nearestPassanger = passengers[0];
-                        for (int i = 1; i < passengers.Count; i++)
-                        {
-                            int passangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[i].Position.PosX, passengers[i].Position.PosY).ToPositions().Count;
-                            if (nearestPassangerDistance > passangerDistance)
-                            {
-                                nearestPassanger = passengers[i];
-                            }
-                        }
+                //    if (IsFindPassanger)
+                //    {
+                //        int nearestPassangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[0].Position.PosX, passengers[0].Position.PosY).ToPositions().Count;
+                //        nearestPassanger = passengers[0];
+                //        for (int i = 1; i < passengers.Count; i++)
+                //        {
+                //            int passangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[i].Position.PosX, passengers[i].Position.PosY).ToPositions().Count;
+                //            if (nearestPassangerDistance > passangerDistance)
+                //            {
+                //                nearestPassanger = passengers[i];
+                //            }
+                //        }
 
-                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
+                //        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
 
-                        IsFindPassanger = false;
-                    }
-                    else
-                    {
-                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
-                    }
+                //        IsFindPassanger = false;
+                //    }
+                //    else
+                //    {
+                //        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
+                //    }
 
-                    //Response  = new Response();
+                //    //Response  = new Response();
 
-                    y = 0;
-                }
-                else
-                {
-                    y++;
-                }
+                //    y = 0;
+                //}
+                //else
+                //{
+                //    y++;
+                //}
                 
             }
 
