@@ -106,10 +106,13 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Location current = null;
             var start = new Location { X = StartX, Y = StartY };
             var target = new Location { X = EndX, Y = EndY };
+            target = CheckRoad(target.X, target.Y, map);
             var openList = new List<Location>();
             var closedList = new List<Location>();
             route = new List<Location>();
             int g = 0;
+            
+            
 
             openList.Add(start);
 
@@ -184,6 +187,29 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 proposedLocations[3] = new Location { X = 0, Y = y };
 
             return proposedLocations.Where(l => map[l.Y][l.X] == 'S' || map[l.Y][l.X] == 'Z').ToList();
+        }
+
+        private Location CheckRoad(int x, int y, string[] map)
+        {
+            var proposedLocations = new List<Location>()
+            {
+                new Location { X = x, Y = y },
+                new Location { X = x, Y = y - 1 },
+                new Location { X = x, Y = y + 1 },
+                new Location { X = x - 1, Y = y },
+                new Location { X = x + 1, Y = y },
+            };
+
+            if (proposedLocations[1].Y == -1)
+                proposedLocations[1] = new Location { X = x, Y = 59 };
+            if (proposedLocations[2].Y == 60)
+                proposedLocations[2] = new Location { X = x, Y = 0 };
+            if (proposedLocations[3].X == -1)
+                proposedLocations[3] = new Location { X = 59, Y = y };
+            if (proposedLocations[4].X == 60)
+                proposedLocations[4] = new Location { X = 0, Y = y };
+
+            return proposedLocations.Where(l => map[l.Y][l.X] == 'S' || map[l.Y][l.X] == 'Z').ToList()[0];
         }
 
         static int ComputeHScore(int x, int y, int targetX, int targetY)
