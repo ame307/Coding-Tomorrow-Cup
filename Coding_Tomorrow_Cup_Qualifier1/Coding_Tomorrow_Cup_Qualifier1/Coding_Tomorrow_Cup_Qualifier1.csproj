@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enum\Directions.cs" />
+    <Compile Include="Enum\Direction.cs" />
     <Compile Include="Connection\FirstMessage.cs" />
     <Compile Include="Model\Response.cs" />
     <Compile Include="Model\Car.cs" />

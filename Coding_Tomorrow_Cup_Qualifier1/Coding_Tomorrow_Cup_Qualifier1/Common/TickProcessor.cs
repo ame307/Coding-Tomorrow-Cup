@@ -14,15 +14,15 @@ namespace Coding_Tomorrow_Cup_Qualifier1
     {
         public JObject Tick { get; set; }
 
-        //public TickProcessor(Uri kapotturl)
-        //{
-        //    using (WebClient wc = new WebClient())
-        //    {
-        //        var json = wc.DownloadString(kapotturl);
-        //        //string valueOrignal = Convert.ToString(json);
-        //        Tick = JObject.Parse(json);
-        //    }
-        //}
+        /*public TickProcessor(Uri kapotturl)
+        {
+            using (WebClient wc = new WebClient())
+            {
+                var json = wc.DownloadString(kapotturl);
+                //string valueOrignal = Convert.ToString(json);
+                Tick = JObject.Parse(json);
+            }
+        }*/
 
         public TickProcessor(string path)
         {

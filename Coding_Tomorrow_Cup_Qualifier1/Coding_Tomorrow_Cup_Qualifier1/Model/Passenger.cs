@@ -21,5 +21,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             DestinyPosition = destinyPostion;
             CarId = carId; 
         }
-    }
+
+   }
 }

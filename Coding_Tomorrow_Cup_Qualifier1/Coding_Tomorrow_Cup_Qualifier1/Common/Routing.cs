@@ -111,8 +111,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             var closedList = new List<Location>();
             route = new List<Location>();
             int g = 0;
-            
-            
 
             openList.Add(start);
 
@@ -235,7 +233,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 direction = route[0].Y < route[1].Y ? Direction.SOUTH : Direction.NORTH;
             else
                 direction = route[0].X < route[1].X ? Direction.EAST : Direction.WEST;
-            Console.WriteLine(direction);
+
+            directions.Add(direction.ToString());
 
             int y = 1;
             while (y < route.Count)
@@ -244,14 +243,12 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 {
                     if (route[y - 1].X < route[y].X)
                     {
-                        //directions.Add(direction == Direction.SOUTH ? "Fordulj balra" : "Fordulj jobbra");
-                        directions.Add(direction == Direction.SOUTH ? "CAR_INDEX_LEFT" : "CAR_INDEX_RIGHT");
+                        directions.Add(direction == Direction.SOUTH ? "LEFT" : "RIGHT");
                         direction = Direction.EAST;
                     }
                     else
                     {
-                        //directions.Add(direction == Direction.NORTH ? "Fordulj balra" : "Fordulj jobbra");
-                        directions.Add(direction == Direction.NORTH ? "CAR_INDEX_LEFT" : "CAR_INDEX_RIGHT");
+                        directions.Add(direction == Direction.NORTH ? "LEFT" : "RIGHT");
                         direction = Direction.WEST;
                     }
                 }
@@ -259,22 +256,22 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 {
                     if (route[y - 1].Y < route[y].Y)
                     {
-                        directions.Add(direction == Direction.EAST ? "CAR_INDEX_RIGHT" : "CAR_INDEX_LEFT");
+                        directions.Add(direction == Direction.EAST ? "RIGHT" : "LEFT");
                         direction = Direction.SOUTH;
                     }
                     else
                     {
-                        directions.Add(direction == Direction.WEST ? "CAR_INDEX_RIGHT" : "CAR_INDEX_LEFT");
+                        directions.Add(direction == Direction.WEST ? "RIGHT" : "LEFT");
                         direction = Direction.NORTH;
                     }
                 }
                 else
                 {
-                    directions.Add("Előre");
+                    directions.Add("FORWARD");
                     y++;
                 }
             }
-            directions.Add("Előre");
+            directions.Add("FORWARD");
             return directions;
         }
     }
