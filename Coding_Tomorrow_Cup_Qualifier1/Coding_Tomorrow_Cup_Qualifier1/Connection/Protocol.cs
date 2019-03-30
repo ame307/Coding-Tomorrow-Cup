@@ -15,7 +15,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         static TcpClient tcpClient = new TcpClient("31.46.64.35", 12323);
         static NetworkStream networkStream = tcpClient.GetStream();
         static StreamWriter streamWriter = new StreamWriter(networkStream);
-
+        public NetworkStream GetNs() {
+            return networkStream;
+        }
+        
         public string FirstMessageSender(FirstMessage firstmessage)
         {
             JObject token = new JObject();

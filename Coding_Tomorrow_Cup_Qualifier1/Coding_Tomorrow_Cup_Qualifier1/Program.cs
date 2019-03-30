@@ -37,7 +37,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             bool IsPassangerSearch = true;
             Passenger nearestPassanger = new Passenger();
 
-            while (tp != null)
+            while (p.GetNs().CanRead && p.GetNs().CanWrite)
             {
 
                 gameid = tp.GetGameId();
@@ -104,8 +104,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \""+ commands[0] +"\"}";
 
                     Console.WriteLine("Elküldött parancs: {0}", json);
-
-                    tp = new TickProcessor(p.MessageSender(json));
+                    string response = p.MessageSender(json);
+                    Console.WriteLine("Szerver válasza: {0}",response);
+                    tp = new TickProcessor(response);
                     commands.RemoveAt(0);
                     y = 0;                   
                 }
@@ -114,8 +115,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \"" + commands[0] + "\"}";
 
                     Console.WriteLine("Elküldött parancs: {0}", json);
-
-                    tp = new TickProcessor(p.MessageSender(json));
+                    string response = p.MessageSender(json);
+                    Console.WriteLine("Szerver válasza: {0}", response);
+                    tp = new TickProcessor(response);
                     commands.RemoveAt(0);
                     y++;
                 } 
