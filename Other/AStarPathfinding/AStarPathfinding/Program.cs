@@ -92,7 +92,8 @@ namespace AStarPathfinding
 
             Location current = null;
             var start = new Location { X = 2, Y = 1 };
-            var target = new Location { X = 33, Y = 49 };
+            var target = new Location { X = 32, Y = 6 };
+            target = CheckRoad(target.X, target.Y, map);
             var openList = new List<Location>();
             var closedList = new List<Location>();
             var route = new List<Location>();
@@ -196,6 +197,29 @@ namespace AStarPathfinding
                 proposedLocations[3] = new Location { X = 0, Y = y };
 
             return proposedLocations.Where(l => map[l.Y][l.X] == 'S' || map[l.Y][l.X] == 'Z').ToList();
+        }
+
+        static Location CheckRoad(int x, int y, string[] map)
+        {
+            var proposedLocations = new List<Location>()
+            {
+                new Location { X = x, Y = y },
+                new Location { X = x, Y = y - 1 },
+                new Location { X = x, Y = y + 1 },
+                new Location { X = x - 1, Y = y },
+                new Location { X = x + 1, Y = y },
+            };
+
+            if (proposedLocations[1].Y == -1)
+                proposedLocations[1] = new Location { X = x, Y = 59 };
+            if (proposedLocations[2].Y == 60)
+                proposedLocations[2] = new Location { X = x, Y = 0 };
+            if (proposedLocations[3].X == -1)
+                proposedLocations[3] = new Location { X = 59, Y = y };
+            if (proposedLocations[4].X == 60)
+                proposedLocations[4] = new Location { X = 0, Y = y };
+
+            return proposedLocations.Where(l => map[l.Y][l.X] == 'S' || map[l.Y][l.X] == 'Z').ToList()[0];
         }
 
         static int ComputeHScore(int x, int y, int targetX, int targetY)
