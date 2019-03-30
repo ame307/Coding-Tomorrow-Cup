@@ -16,7 +16,14 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
         public TickProcessor(string fromServer)
         {           
-            Tick = JObject.Parse(fromServer);
+            if(fromServer == "")
+            {
+                Tick = null;
+            }
+            else
+            {
+                Tick = JObject.Parse(fromServer);
+            } 
         }
 
         public int GetGameId()
