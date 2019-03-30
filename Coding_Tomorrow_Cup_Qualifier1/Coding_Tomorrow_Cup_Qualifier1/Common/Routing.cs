@@ -227,7 +227,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public List<string> ToDirections()
         {
             List<string> directions = new List<string>();
-            Direction direction = Direction.NORTH;
+            Direction direction = Direction.WEST;
 
             if(route.Count == 1)
             {

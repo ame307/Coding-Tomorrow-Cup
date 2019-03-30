@@ -11,8 +11,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     public class Response
     {
-        //private  TickProcessor tp = new TickProcessor(Path.Combine(Path.GetFullPath(@"..\..\"), "Resources/TickExample.json"));
-        //private TickProcessor tp = new TickProcessor(new Uri("http://31.46.64.35:12323/"));
         public int GameId { get; set; }
 
         public int Tick { get; set; }
@@ -28,16 +26,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             CarId = carId;
             Command = command;
         }  
-
-        /*public string Output(Response response)
-        {
-            response.GameId = tp.GetGameId();
-            response.Tick = tp.GetTick();
-            response.CarId = tp.GetCarId();
-            response.Command = Command;
-            return JsonConvert.SerializeObject(response);
-        }*/
-
         public static List<string> GetResponseFromDirections(List<string> legrovidebbut)
         {
             List<string> responses = new List<string>();
