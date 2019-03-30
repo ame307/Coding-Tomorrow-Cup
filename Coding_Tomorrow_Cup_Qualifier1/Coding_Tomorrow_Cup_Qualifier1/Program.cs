@@ -48,7 +48,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
                 Console.WriteLine(tick);
 
-                if (y >= n || n == 0)
+                if (y >= n-1 || n == 0)
                 {
                     for (int i = 0; i < messages.Count; i++)
                     {
@@ -73,10 +73,11 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         }
 
                         Console.WriteLine("Kocsi induló pozíció: ({0};{1})", cars[0].Position.PosX, cars[0].Position.PosY);
+                        Console.WriteLine("Kocsi iránya: ", cars[0].Direction);
                         Console.WriteLine("Legközelebbi utas:\nId:{0}\nPosition: ({1};{2})\nDestiny position: ({3};{4})", nearestPassanger.Id, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY);
 
                         commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
-                        commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
+                        commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
 
                         n = commands.Count();
 
@@ -100,7 +101,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         Console.WriteLine("Kocsi induló pozíció: ({0};{1})", cars[0].Position.PosX, cars[0].Position.PosY);
                         Console.WriteLine("Végpont: ({0};{1})", nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY);
                         commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
-                        commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
+                        commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
 
                         n = commands.Count();
 
@@ -110,7 +111,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                             Console.WriteLine(commands[i]);
                         }
                         Console.WriteLine("\n\nÚtvonal pozíciók:");
-                        for (int i = 0; i < commands.Count; i++)
+                        for (int i = 0; i < commands2.Count; i++)
                         {
                             Console.WriteLine("({0};{1})", commands2[i].PosX, commands2[i].PosY);
                         }
