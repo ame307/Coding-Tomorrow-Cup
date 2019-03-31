@@ -78,12 +78,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 commands.Add("CAR_INDEX_LEFT");
             }
-
-
             commands.Add("ACCELERATION");
 
-
-
+            int speed = 1;
             for (int i = 0; i < directions.Count - 1; i++)
             {
                 if (directions[i + 1] == "LEFT")
@@ -102,9 +99,25 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 {
                     if (directions.Count > i + 1)
                     {
-                        for (int j = 0; j < Convert.ToInt32(directions[i + 1]) - 1; j++)
+                        if(Convert.ToInt32(directions[i + 1]) < 5)
                         {
-                            commands.Add("NO_OP");
+                            for (int j = 0; j < Convert.ToInt32(directions[i + 1]) - 1; j++)
+                            {
+                                commands.Add("NO_OP");
+                            }
+                        }
+                        else if (Convert.ToInt32(directions[i + 1]) >= 5)
+                        {
+                            commands.Add("ACCELERATION");
+                            for (int j = 0; j < ((Convert.ToInt32(directions[i + 1]) - 4) / 2); j++)
+                            {
+                                commands.Add("NO_OP");
+                            }
+                            commands.Add("DECELERATION");
+                            if (((Convert.ToInt32(directions[i + 1]) - 4) % 2) == 1)
+                            {
+                                commands.Add("NO_OP");
+                            }
                         }
                     }
                 }
