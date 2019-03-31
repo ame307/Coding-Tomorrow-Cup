@@ -79,20 +79,24 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 commands.Add("CAR_INDEX_LEFT");
             }
 
-            if(this.Speed == 0)
-            {
-                commands.Add("ACCELERATION");
-            }
+
+            commands.Add("ACCELERATION");
+
+
 
             for (int i = 0; i < directions.Count - 1; i++)
             {
                 if (directions[i + 1] == "LEFT")
                 {
+                    commands.Add("DECELERATION");
                     commands.Add("CAR_INDEX_LEFT");
+                    commands.Add("ACCELERATION");
                 }
                 else if (directions[i + 1] == "RIGHT")
                 {
+                    commands.Add("DECELERATION");
                     commands.Add("CAR_INDEX_RIGHT");
+                    commands.Add("ACCELERATION");
                 }
                 else
                 {
@@ -105,6 +109,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     }
                 }
             }
+
             commands.Add("DECELERATION");
 
             return commands;

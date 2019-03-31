@@ -77,6 +77,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         Console.WriteLine("Legközelebbi utas:\nId:{0}\nPosition: ({1};{2})\nDestiny position: ({3};{4})", nearestPassanger.Id, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY);
 
                         commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
+
                         commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
 
                         n = commands.Count();
@@ -115,6 +116,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         {
                             Console.WriteLine("({0};{1})", commands2[i].PosX, commands2[i].PosY);
                         }
+
+                        IsPassangerSearch = true;
                     }
                 
                     var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \""+ commands[0] +"\"}";
@@ -169,6 +172,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             List<string> commands = kocsi.CreateCommands(directions);
             Console.WriteLine("--Utasítások--");
+
             for (int i = 0; i < commands.Count; i++)
             {
                 Console.WriteLine(commands[i]);
