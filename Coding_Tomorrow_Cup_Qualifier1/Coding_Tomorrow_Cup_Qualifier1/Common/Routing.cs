@@ -275,7 +275,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     y++;
                 }
             }
-            directions.Add("FORWARD");
             return directions;
         }
     }

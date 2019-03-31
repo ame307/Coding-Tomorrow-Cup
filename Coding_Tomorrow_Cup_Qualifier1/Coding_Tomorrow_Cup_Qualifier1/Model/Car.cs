@@ -96,19 +96,16 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 }
                 else
                 {
-                    if (directions.Count > i + 2)
+                    if (directions.Count > i + 1)
                     {
                         for (int j = 0; j < Convert.ToInt32(directions[i + 1]) - 1; j++)
                         {
                             commands.Add("NO_OP");
                         }
                     }
-                    else
-                    {
-                        commands.Add("DECELERATION");
-                    }
                 }
             }
+            commands.Add("DECELERATION");
 
             return commands;
         }

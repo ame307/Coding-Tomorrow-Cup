@@ -61,11 +61,11 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         Console.WriteLine("-------Utas keresése--------");
 
 
-                        int nearestPassangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[0].Position.PosX, passengers[0].Position.PosY).ToPositions().Count;
+                        int nearestPassangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, passengers[0].Position.PosX, passengers[0].Position.PosY).ToPositions().Count;
                         nearestPassanger = passengers[0];
                         for (int i = 1; i < passengers.Count; i++)
                         {
-                            int passangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, passengers[i].Position.PosX, passengers[i].Position.PosY).ToPositions().Count;
+                            int passangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, passengers[i].Position.PosX, passengers[i].Position.PosY).ToPositions().Count;
                             if (nearestPassangerDistance > passangerDistance)
                             {
                                 nearestPassanger = passengers[i];
@@ -73,10 +73,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         }
 
                         Console.WriteLine("Kocsi induló pozíció: ({0};{1})", cars[0].Position.PosX, cars[0].Position.PosY);
-                        Console.WriteLine("Kocsi iránya: ", cars[0].Direction);
+                        Console.WriteLine("Kocsi iránya: {0}", cars[0].Direction);
                         Console.WriteLine("Legközelebbi utas:\nId:{0}\nPosition: ({1};{2})\nDestiny position: ({3};{4})", nearestPassanger.Id, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY);
 
-                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
+                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
                         commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
 
                         n = commands.Count();
@@ -100,7 +100,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         Console.WriteLine("-------Útvonal keresése--------");
                         Console.WriteLine("Kocsi induló pozíció: ({0};{1})", cars[0].Position.PosX, cars[0].Position.PosY);
                         Console.WriteLine("Végpont: ({0};{1})", nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY);
-                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosX, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
+                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
                         commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
 
                         n = commands.Count();
@@ -139,8 +139,41 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 } 
                 
             }
-
             p.Close();
+            
+
+
+            /*Car kocsi = new Car(0, new Pos(21, 2), 100, 0, "LEFT", "NO_OP", 0);
+            Pos utasPos = new Pos(47, 58);
+            Pos desPos = new Pos(55, 20);
+
+            Console.WriteLine("--Adatok--");
+            Console.WriteLine("Kocsi: {0}:{1}", kocsi.Position.PosX, kocsi.Position.PosY);
+            Console.WriteLine("Kocsi irány: {0}", kocsi.Direction);
+            Console.WriteLine("Utas: {0}:{1}", utasPos.PosX, utasPos.PosY);
+
+            Routing path = Routing.GetInstance();
+            List<Pos> positions = path.FindRoute(kocsi.Position.PosX, kocsi.Position.PosY, utasPos.PosX, utasPos.PosY).ToPositions();
+            Console.WriteLine("--Út koordináták--");
+            for (int i = 0; i < positions.Count; i++)
+            {
+                Console.WriteLine(positions[i].PosX + ":" + positions[i].PosY);
+            }
+
+            List<string> directions = path.FindRoute(kocsi.Position.PosX, kocsi.Position.PosY, utasPos.PosX, utasPos.PosY).ToDirections();
+            Console.WriteLine("--Irányok--");
+            for (int i = 0; i < directions.Count; i++)
+            {
+                Console.WriteLine(directions[i]);
+            }
+
+            List<string> commands = kocsi.CreateCommands(directions);
+            Console.WriteLine("--Utasítások--");
+            for (int i = 0; i < commands.Count; i++)
+            {
+                Console.WriteLine(commands[i]);
+            }*/
+
             Console.ReadKey();
 
         }
