@@ -99,14 +99,14 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 {
                     if (directions.Count > i + 1)
                     {
-                        if(Convert.ToInt32(directions[i + 1]) < 5)
+                        if(Convert.ToInt32(directions[i + 1]) <= 4)
                         {
                             for (int j = 0; j < Convert.ToInt32(directions[i + 1]) - 1; j++)
                             {
                                 commands.Add("NO_OP");
                             }
                         }
-                        else if (Convert.ToInt32(directions[i + 1]) >= 5)
+                        else if (Convert.ToInt32(directions[i + 1]) > 4 && Convert.ToInt32(directions[i + 1]) <= 13)
                         {
                             commands.Add("ACCELERATION");
                             for (int j = 0; j < ((Convert.ToInt32(directions[i + 1]) - 4) / 2); j++)
@@ -116,6 +116,39 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                             commands.Add("DECELERATION");
                             if (((Convert.ToInt32(directions[i + 1]) - 4) % 2) == 1)
                             {
+                                commands.Add("NO_OP");
+                            }
+                        }
+						else if (Convert.ToInt32(directions[i + 1]) > 13)
+                        {
+							commands.Add("ACCELERATION");
+							commands.Add("ACCELERATION");
+							
+							int x = Convert.ToInt32(directions[i + 1]) - 14;
+                            for (int j = 0; j < (x / 3) + 1; j++)
+                            {
+                                commands.Add("NO_OP");
+                            }
+
+                            if(x % 3 == 0)
+                            {
+                                commands.Add("DECELERATION");
+                                commands.Add("DECELERATION");
+                                commands.Add("NO_OP");
+                                commands.Add("NO_OP");
+                            }
+                            else if (x % 3 == 1)
+                            {
+                                commands.Add("DECELERATION");
+                                commands.Add("NO_OP");
+                                commands.Add("DECELERATION");
+                                commands.Add("NO_OP");
+                            }
+                            else if (x % 3 == 2)
+                            {
+                                commands.Add("NO_OP");
+                                commands.Add("DECELERATION");
+                                commands.Add("DECELERATION");
                                 commands.Add("NO_OP");
                             }
                         }

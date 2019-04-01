@@ -36,7 +36,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             bool IsPassangerSearch = true;
             Passenger nearestPassanger = new Passenger();
 
-            do
+            while (p.GetNs().CanRead && p.GetNs().CanWrite)
             {
 
                 gameid = tp.GetGameId();
@@ -141,13 +141,13 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     y++;
                 } 
                 
-            } while (messages.Count == 0);
+            }
             p.Close();
             
 
-
-            /*Car kocsi = new Car(0, new Pos(21, 2), 100, 0, "LEFT", "NO_OP", 0);
-            Pos utasPos = new Pos(47, 58);
+            /*
+            Car kocsi = new Car(0, new Pos(57, 58), 100, 0, "UP", "NO_OP", 0);
+            Pos utasPos = new Pos(27, 57);
             Pos desPos = new Pos(55, 20);
 
             Console.WriteLine("--Adatok--");
