@@ -67,3 +67,4 @@ C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csprojResolveAssemblyReference.cache
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.Properties.Resources.resources
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.GenerateResource.Cache
+F:\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.pdb
