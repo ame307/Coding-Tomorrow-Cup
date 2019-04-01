@@ -36,7 +36,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             bool IsPassangerSearch = true;
             Passenger nearestPassanger = new Passenger();
 
-            while (p.GetNs().CanRead && p.GetNs().CanWrite)
+            do
             {
 
                 gameid = tp.GetGameId();
@@ -141,7 +141,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     y++;
                 } 
                 
-            }
+            } while (messages.Count == 0);
             p.Close();
             
 
