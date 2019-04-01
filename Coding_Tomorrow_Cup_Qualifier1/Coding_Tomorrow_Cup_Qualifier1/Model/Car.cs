@@ -85,15 +85,31 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 if (directions[i + 1] == "LEFT")
                 {
-                    commands.Add("DECELERATION");
-                    commands.Add("CAR_INDEX_LEFT");
-                    commands.Add("ACCELERATION");
+                    /*if((commands[commands.Count-1] == "NO_OP" && commands[commands.Count - 2] == "NO_OP") && speed == 1)
+                    {
+                        commands.RemoveAt(commands.Count - 1);
+                        commands.Add("CAR_INDEX_LEFT");
+                    }
+                    else
+                    {*/
+                        commands.Add("DECELERATION");
+                        commands.Add("CAR_INDEX_LEFT");
+                        commands.Add("ACCELERATION");
+                    //}
                 }
                 else if (directions[i + 1] == "RIGHT")
                 {
-                    commands.Add("DECELERATION");
-                    commands.Add("CAR_INDEX_RIGHT");
-                    commands.Add("ACCELERATION");
+                    /*if ((commands[commands.Count - 1] == "NO_OP" && commands[commands.Count - 2] == "NO_OP") && speed == 1)
+                    {
+                        commands.RemoveAt(commands.Count - 1);
+                        commands.Add("CAR_INDEX_RIGHT");
+                    }
+                    else
+                    {*/
+                        commands.Add("DECELERATION");
+                        commands.Add("CAR_INDEX_RIGHT");
+                        commands.Add("ACCELERATION");
+                    //}
                 }
                 else
                 {
@@ -109,6 +125,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         else if (Convert.ToInt32(directions[i + 1]) > 4 && Convert.ToInt32(directions[i + 1]) <= 13)
                         {
                             commands.Add("ACCELERATION");
+                            speed = 2;
                             for (int j = 0; j < ((Convert.ToInt32(directions[i + 1]) - 4) / 2); j++)
                             {
                                 commands.Add("NO_OP");
@@ -123,6 +140,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         {
 							commands.Add("ACCELERATION");
 							commands.Add("ACCELERATION");
+                            speed = 3;
 							
 							int x = Convert.ToInt32(directions[i + 1]) - 14;
                             for (int j = 0; j < (x / 3) + 1; j++)

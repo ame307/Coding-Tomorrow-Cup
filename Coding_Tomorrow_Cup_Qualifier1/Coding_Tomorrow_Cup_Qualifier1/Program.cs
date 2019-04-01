@@ -42,7 +42,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 gameid = tp.GetGameId();
                 tick = tp.GetTick();
                 cars = tp.GetCars();
-                pedestrians = tp.GetPedestrians();
                 passengers = tp.GetPassengers();
                 messages = tp.GetMessages();
 
@@ -57,7 +56,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
                     if (IsPassangerSearch)
                     {
-
+                        pedestrians = tp.GetPedestrians();
                         Console.WriteLine("-------Utas keresése--------");
 
 
