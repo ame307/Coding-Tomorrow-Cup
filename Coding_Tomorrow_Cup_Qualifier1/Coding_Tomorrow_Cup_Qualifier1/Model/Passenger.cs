@@ -9,6 +9,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
     public class Passenger
     {
 
+        public Passenger() { };
+
         public int Id { get; set; }
         public Pos Position { get; set; }
         public Pos DestinyPosition { get; set; }
