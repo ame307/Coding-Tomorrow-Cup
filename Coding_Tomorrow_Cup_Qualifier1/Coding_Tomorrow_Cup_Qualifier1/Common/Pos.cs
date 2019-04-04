@@ -11,11 +11,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public int PosX { get; set; }
         public int PosY { get; set; }
 
-        public Pos()
-        {
-
-        }
-
         public Pos(int x, int y)
         {
             PosX = x;

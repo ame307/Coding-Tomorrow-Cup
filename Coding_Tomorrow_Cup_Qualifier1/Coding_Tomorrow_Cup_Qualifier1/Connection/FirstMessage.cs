@@ -23,10 +23,5 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
             return firstmessage;
         }
-
-        private FirstMessage()
-        {
-
-        }
     }
 }

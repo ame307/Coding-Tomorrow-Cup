@@ -142,40 +142,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 
             }
             p.Close();
-            
-
-            /*
-            Car kocsi = new Car(0, new Pos(57, 58), 100, 0, "UP", "NO_OP", 0);
-            Pos utasPos = new Pos(27, 57);
-            Pos desPos = new Pos(55, 20);
-
-            Console.WriteLine("--Adatok--");
-            Console.WriteLine("Kocsi: {0}:{1}", kocsi.Position.PosX, kocsi.Position.PosY);
-            Console.WriteLine("Kocsi irány: {0}", kocsi.Direction);
-            Console.WriteLine("Utas: {0}:{1}", utasPos.PosX, utasPos.PosY);
-
-            Routing path = Routing.GetInstance();
-            List<Pos> positions = path.FindRoute(kocsi.Position.PosX, kocsi.Position.PosY, utasPos.PosX, utasPos.PosY).ToPositions();
-            Console.WriteLine("--Út koordináták--");
-            for (int i = 0; i < positions.Count; i++)
-            {
-                Console.WriteLine(positions[i].PosX + ":" + positions[i].PosY);
-            }
-
-            List<string> directions = path.FindRoute(kocsi.Position.PosX, kocsi.Position.PosY, utasPos.PosX, utasPos.PosY).ToDirections();
-            Console.WriteLine("--Irányok--");
-            for (int i = 0; i < directions.Count; i++)
-            {
-                Console.WriteLine(directions[i]);
-            }
-
-            List<string> commands = kocsi.CreateCommands(directions);
-            Console.WriteLine("--Utasítások--");
-
-            for (int i = 0; i < commands.Count; i++)
-            {
-                Console.WriteLine(commands[i]);
-            }*/
 
             Console.ReadKey();
 

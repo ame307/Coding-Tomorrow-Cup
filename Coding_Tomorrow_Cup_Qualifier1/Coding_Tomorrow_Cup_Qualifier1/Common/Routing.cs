@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Coding_Tomorrow_Cup_Qualifier1.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,22 +8,9 @@ using System.Threading.Tasks;
 
 namespace Coding_Tomorrow_Cup_Qualifier1
 {
-    class Location
-    {
-        public int X;
-        public int Y;
-        public int F;
-        public int G;
-        public int H;
-        public Location Parent;
-    }
-
     class Routing
-    {
+    {   
         private static Routing instance;
-
-        private List<Location> route;
-
         public static Routing GetInstance()
         {
             if (instance == null)
@@ -32,20 +20,13 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             return instance;
         }
-
-        private Routing()
-        {
-
-        }
-        public Routing FindRoute(int StartX, int StartY, int EndX, int EndY)
-        {
-            string[] map = new string[]
+        private static string[] defaultmap = new string[]
             {
                 "GPSSPGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGPSSPG",
                 "PPSSPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPSSPP",
                 "SSSSSSSSSSSSSSSSSSSSSSSSSSSSZSSZSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
                 "SSSSSSSSSSSSSSSSSSSSSSSSSSSSZSSZSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-                "GPSSPPPZZPPPPPPPPPPPPPPPPPPPPSSPPPPPPPPPPPPPPPPPPPPZZPPPSSPP",
+                "PPSSPPPZZPPPPPPPPPPPPPPPPPPPPSSPPPPPPPPPPPPPPPPPPPPZZPPPSSPP",
                 "GPSSPGPSSPGBBGBBGGBBGGBBGBBGPSSPGBBGBBGGBBGGBBGBBGPSSPBPSSPG",
                 "GPSSPBPSSPPPPPPPPPPPPPPPPPPPPSSPPPPPPPPPPPPPPPPPPPPSSPBPSSPG",
                 "GPSSPBPSSSSSSSSZSSZSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSPGPSSPG",
@@ -102,22 +83,27 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 "PPSSPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPSSPP",
                 "GPSSPGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGPSSPG"
             };
+        private static string[] map = defaultmap;
+        private List<Location> route;
 
+        public Routing FindRoute(int StartX, int StartY, int TargetX, int TargetY)
+        {
             Location current = null;
             var start = new Location { X = StartX, Y = StartY };
-            var target = new Location { X = EndX, Y = EndY };
-            target = CheckRoad(target.X, target.Y, map);
+            var target = new Location { X = TargetX, Y = TargetY };
             var openList = new List<Location>();
             var closedList = new List<Location>();
+            int currentDistanceFromStart = 0;
+
             route = new List<Location>();
-            int g = 0;
+            target = CheckRoad(target.X, target.Y, map);
 
             openList.Add(start);
 
             while (openList.Count > 0)
             {
-                var lowest = openList.Min(l => l.F);
-                current = openList.First(l => l.F == lowest);
+                var lowest = openList.Min(l => l.distanceScore);
+                current = openList.First(l => l.distanceScore == lowest);
                 closedList.Add(current);
                 openList.Remove(current);
 
@@ -125,31 +111,28 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     break;
 
                 var adjacentSquares = GetWalkableAdjacentSquares(current.X, current.Y, map);
-                g++;
+                currentDistanceFromStart++;
 
                 foreach (var adjacentSquare in adjacentSquares)
                 {
-                    if (closedList.FirstOrDefault(l => l.X == adjacentSquare.X
-                            && l.Y == adjacentSquare.Y) != null)
+                    if (closedList.FirstOrDefault(l => l.X == adjacentSquare.X && l.Y == adjacentSquare.Y) != null)
                         continue;
 
-                    if (openList.FirstOrDefault(l => l.X == adjacentSquare.X
-                            && l.Y == adjacentSquare.Y) == null)
+                    if (openList.FirstOrDefault(l => l.X == adjacentSquare.X && l.Y == adjacentSquare.Y) == null)
                     {
-                        adjacentSquare.G = g;
-                        adjacentSquare.H = ComputeHScore(adjacentSquare.X, adjacentSquare.Y, target.X, target.Y);
-                        adjacentSquare.F = adjacentSquare.G + adjacentSquare.H;
-                        adjacentSquare.Parent = current;
-
+                        adjacentSquare.distanceFromStart = currentDistanceFromStart;
+                        adjacentSquare.distanceFromTarget = ComputeEndDistance(adjacentSquare.X, adjacentSquare.Y, target.X, target.Y);
+                        adjacentSquare.distanceScore = adjacentSquare.distanceFromStart + adjacentSquare.distanceFromTarget;
+                        adjacentSquare.previousLocation = current;
                         openList.Insert(0, adjacentSquare);
                     }
                     else
                     {
-                        if (g + adjacentSquare.H > adjacentSquare.F)
+                        if (currentDistanceFromStart + adjacentSquare.distanceFromTarget > adjacentSquare.distanceScore)
                         {
-                            adjacentSquare.G = g;
-                            adjacentSquare.F = adjacentSquare.G + adjacentSquare.H;
-                            adjacentSquare.Parent = current;
+                            adjacentSquare.distanceFromStart = currentDistanceFromStart;
+                            adjacentSquare.distanceScore = adjacentSquare.distanceFromStart + adjacentSquare.distanceFromTarget;
+                            adjacentSquare.previousLocation = current;
                         }
                     }
                 }
@@ -158,7 +141,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             while (current != null)
             {
                 route.Add(new Location { X = current.X, Y = current.Y });
-                current = current.Parent;
+                current = current.previousLocation;
             }
 
             route.Reverse();
@@ -210,11 +193,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return proposedLocations.Where(l => map[l.Y][l.X] == 'S' || map[l.Y][l.X] == 'Z').ToList()[0];
         }
 
-        static int ComputeHScore(int x, int y, int targetX, int targetY)
+        static int ComputeEndDistance(int x, int y, int targetX, int targetY)
         {
             return Math.Abs(targetX - x) + Math.Abs(targetY - y);
         }
-
 
         public List<Pos> ToPositions()
         {
@@ -229,23 +211,19 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             List<string> directions = new List<string>();
             Direction direction = new Direction();
 
-            if(route.Count == 1)
-            {
-
-            }
+            if(route.Count == 1){}
             else if (route[0].X - route[1].X == 0)
                 direction = route[0].Y < route[1].Y ? Direction.SOUTH : Direction.NORTH;
             else
                 direction = route[0].X < route[1].X ? Direction.EAST : Direction.WEST;
-
             directions.Add(direction.ToString());
 
-            int y = 1;
-            while (y < route.Count)
+            int i = 1;
+            while (i < route.Count)
             {
-                if (route[y - 1].X != route[y].X && (direction == Direction.NORTH || direction == Direction.SOUTH))
+                if (route[i - 1].X != route[i].X && (direction == Direction.NORTH || direction == Direction.SOUTH))
                 {
-                    if (route[y - 1].X < route[y].X)
+                    if (route[i - 1].X < route[i].X)
                     {
                         directions.Add(direction == Direction.SOUTH ? "LEFT" : "RIGHT");
                         direction = Direction.EAST;
@@ -256,9 +234,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         direction = Direction.WEST;
                     }
                 }
-                else if (route[y - 1].Y != route[y].Y && (direction == Direction.WEST || direction == Direction.EAST))
+                else if (route[i - 1].Y != route[i].Y && (direction == Direction.WEST || direction == Direction.EAST))
                 {
-                    if (route[y - 1].Y < route[y].Y)
+                    if (route[i - 1].Y < route[i].Y)
                     {
                         directions.Add(direction == Direction.EAST ? "RIGHT" : "LEFT");
                         direction = Direction.SOUTH;
@@ -272,7 +250,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 else
                 {
                     directions.Add("FORWARD");
-                    y++;
+                    i++;
                 }
             }
             return directions;
