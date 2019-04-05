@@ -12,139 +12,81 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     class Program
     {
+        static WriteOutData wod = new WriteOutData();
+
+        static List<Pos> routePositions = new List<Pos>();
         static void Main(string[] args)
         {
+            #region Declarations
             Protocol p = new Protocol();
             FirstMessage fm = FirstMessage.Firstmessage();
             TickProcessor tp = new TickProcessor(p.FirstMessageSender(fm));
 
-            int gameid;
-            int tick = tp.GetTick();
-
-
-            List<Car> cars = new List<Car>();
-            List<Pedestrian> pedestrians = new List<Pedestrian>();
-            List<Passenger> passengers = new List<Passenger>();
-            List<string> messages = new List<string>();
-            Routing path = Routing.GetInstance();
+            List<string> messages;
             List<string> commands = new List<string>();
-            List<Pos> commands2 = new List<Pos>();
-            List<string> responses = new List<string>();
 
-            int y=0;
-            int n = 0;
-            bool IsPassangerSearch = true;
-            Passenger nearestPassanger = new Passenger();
+            List<Car> cars;
+            List<Pedestrian> pedestrians = new List<Pedestrian>();
+            List<Passenger> passengers;
+            Passenger nearestPassenger = new Passenger();
 
-            while (p.GetNs().CanRead && p.GetNs().CanWrite)
+            Routing path = Routing.GetInstance();
+            int countofRemovedCommands = 0;
+            int countofCommands = 0;
+            bool IsPassengerSearch = true;
+            #endregion
+
+            do
             {
-
-                gameid = tp.GetGameId();
-                tick = tp.GetTick();
                 cars = tp.GetCars();
                 passengers = tp.GetPassengers();
                 messages = tp.GetMessages();
 
-                Console.WriteLine(tick);
-
-                if (y >= n-1 || n == 0)
+                if (countofRemovedCommands >= countofCommands - 1 || countofCommands == 0)
                 {
-                    for (int i = 0; i < messages.Count; i++)
+                    if (IsPassengerSearch)
                     {
-                        Console.WriteLine(messages[i]);
-                    }
-
-                    if (IsPassangerSearch)
-                    {
-                        pedestrians = tp.GetPedestrians();
-                        Console.WriteLine("-------Utas keresése--------");
-
-
-                        int nearestPassangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, passengers[0].Position.PosX, passengers[0].Position.PosY).ToPositions().Count;
-                        nearestPassanger = passengers[0];
-                        for (int i = 1; i < passengers.Count; i++)
-                        {
-                            int passangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, passengers[i].Position.PosX, passengers[i].Position.PosY).ToPositions().Count;
-                            if (nearestPassangerDistance > passangerDistance)
-                            {
-                                nearestPassanger = passengers[i];
-                            }
-                        }
-
-                        Console.WriteLine("Kocsi induló pozíció: ({0};{1})", cars[0].Position.PosX, cars[0].Position.PosY);
-                        Console.WriteLine("Kocsi iránya: {0}", cars[0].Direction);
-                        Console.WriteLine("Legközelebbi utas:\nId:{0}\nPosition: ({1};{2})\nDestiny position: ({3};{4})", nearestPassanger.Id, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY);
-
-                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToDirections());
-
-                        commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
-
-                        n = commands.Count();
-
-                        Console.WriteLine("\n\nÚtvonal utasítások:");               
-                        for (int i = 0; i < commands.Count; i++)
-                        {
-                            Console.WriteLine(commands[i]);
-                        }
-                        Console.WriteLine("\n\nÚtvonal pozíciók:");
-                        for (int i = 0; i < commands2.Count; i++)
-                        {
-                            Console.WriteLine("({0};{1})",commands2[i].PosX, commands2[i].PosY);
-                        }
-
-
-                        IsPassangerSearch = false;
+                        PassengerSearching passengerSearching = new PassengerSearching();
+                        nearestPassenger = passengerSearching.Searching(path, cars, passengers, nearestPassenger);
+                        wod.GetNearestPassangerPosition(cars, nearestPassenger);
+                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY).ToDirections());
+                        routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY).ToPositions();
+                        wod.WriteOutCommands(commands);
+                        wod.WriteOutRoutePositions(routePositions);
+                        IsPassengerSearch = false;
                     }
                     else
                     {
-                        Console.WriteLine("-------Útvonal keresése--------");
-                        Console.WriteLine("Kocsi induló pozíció: ({0};{1})", cars[0].Position.PosX, cars[0].Position.PosY);
-                        Console.WriteLine("Végpont: ({0};{1})", nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY);
-                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.DestinyPosition.PosX, nearestPassanger.DestinyPosition.PosY).ToDirections());
-                        commands2 = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassanger.Position.PosX, nearestPassanger.Position.PosY).ToPositions();
-
-                        n = commands.Count();
-
-                        Console.WriteLine("\n\nÚtvonal utasítások:");
-                        for (int i = 0; i < commands.Count; i++)
-                        {
-                            Console.WriteLine(commands[i]);
-                        }
-                        Console.WriteLine("\n\nÚtvonal pozíciók:");
-                        for (int i = 0; i < commands2.Count; i++)
-                        {
-                            Console.WriteLine("({0};{1})", commands2[i].PosX, commands2[i].PosY);
-                        }
-
-                        IsPassangerSearch = true;
+                        wod.GetPathandEndPoint(cars, nearestPassenger);
+                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.DestinyPosition.PosX, nearestPassenger.DestinyPosition.PosY).ToDirections());
+                        routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY).ToPositions();
+                        wod.WriteOutCommands(commands);
+                        wod.WriteOutRoutePositions(routePositions);
+                        IsPassengerSearch = true;
                     }
-                
-                    var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \""+ commands[0] +"\"}";
-
-                    Console.WriteLine("Elküldött parancs: {0}", json);
-                    string response = p.MessageSender(json);
-                    Console.WriteLine("Szerver válasza: {0}",response);
-                    tp = new TickProcessor(response);
-                    commands.RemoveAt(0);
-                    y = 0;                   
+                    tp = ResponseSend(tp, commands, p, cars[0].Id);
+                    countofRemovedCommands = 0;
                 }
                 else
                 {
-                    var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \"" + commands[0] + "\"}";
-
-                    Console.WriteLine("Elküldött parancs: {0}", json);
-                    string response = p.MessageSender(json);
-                    Console.WriteLine("Szerver válasza: {0}", response);
-                    tp = new TickProcessor(response);
-                    commands.RemoveAt(0);
-                    y++;
-                } 
-                
-            }
+                    tp = ResponseSend(tp, commands, p, cars[0].Id);
+                    countofRemovedCommands++;
+                }
+            } while (messages.Count == 0);
             p.Close();
-
+            Console.WriteLine(messages[0]);
             Console.ReadKey();
+        }
 
+        private static TickProcessor ResponseSend(TickProcessor tp, List<string> commands, Protocol p, int carID)
+        {
+            WriteOutData wod = new WriteOutData();
+            int tick = tp.GetTick();
+            var json = "{\"response_id\":{\"game_id\": " + tp.GetGameId() + ",\"tick\": " + tick + ",\"car_id\": " + carID + "},\"command\": \"" + commands[0] + "\"}";
+            string response = wod.Response(p, json);
+            tp = new TickProcessor(response);
+            commands.RemoveAt(0);
+            return tp;
         }
     }
 }
