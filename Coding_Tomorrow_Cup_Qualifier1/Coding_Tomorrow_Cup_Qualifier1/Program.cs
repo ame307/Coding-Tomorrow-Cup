@@ -57,8 +57,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         nearestPassenger = passengerSearching.Searching(path, cars, passengers, nearestPassenger);
                         wod.GetNearestPassangerPosition(cars, nearestPassenger);
 
-                        commands = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToCommands();
-                        routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToPositions();
+                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY).ToDirections());
+                        routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY).ToPositions();
 
                         countofCommands = commands.Count();
 
@@ -71,8 +71,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     {
                         wod.GetPathandEndPoint(cars, nearestPassenger);
 
-                        commands = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.DestinyPosition.PosX, nearestPassenger.DestinyPosition.PosY, cars[0]).ToCommands();
-                        routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToPositions();
+                        commands = cars[0].CreateCommands(path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.DestinyPosition.PosX, nearestPassenger.DestinyPosition.PosY).ToDirections());
+                        routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY).ToPositions();
 
                         countofCommands = commands.Count();
 
