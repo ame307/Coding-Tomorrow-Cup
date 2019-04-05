@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Location.cs" />
+    <Compile Include="Common\PassengerSearching.cs" />
+    <Compile Include="Common\WriteOutData.cs" />
     <Compile Include="Enum\Direction.cs" />
     <Compile Include="Connection\FirstMessage.cs" />
     <Compile Include="Model\Response.cs" />

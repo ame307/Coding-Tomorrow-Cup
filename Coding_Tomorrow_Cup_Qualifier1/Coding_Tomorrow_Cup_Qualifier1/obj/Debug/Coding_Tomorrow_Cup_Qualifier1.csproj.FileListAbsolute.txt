@@ -102,3 +102,4 @@ C:\Users\Gajdi\Desktop\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualif
 C:\Users\Gajdi\Desktop\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Gajdi\Desktop\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Gajdi\Desktop\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CopyComplete
+F:\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.pdb
