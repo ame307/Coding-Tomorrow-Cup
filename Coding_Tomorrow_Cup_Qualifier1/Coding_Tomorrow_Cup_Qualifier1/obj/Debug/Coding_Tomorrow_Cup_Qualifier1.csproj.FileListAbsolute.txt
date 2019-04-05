@@ -64,6 +64,7 @@ C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.dll
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csprojResolveAssemblyReference.cache
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.Properties.Resources.resources
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.GenerateResource.Cache
 C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup-master\Coding-Tomorrow-Cup-master\Coding-Tomorrow-Cup-master\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Coding_Tomorrow_Cup_Qualifier1.exe.config
@@ -101,6 +102,4 @@ C:\Users\Gajdi\Desktop\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualif
 C:\Users\Gajdi\Desktop\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Gajdi\Desktop\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Gajdi\Desktop\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CopyComplete
-C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csprojAssemblyReference.cache
-C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CoreCompileInputs.cache
-C:\Users\tesa3\Desktop\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\obj\Debug\Coding_Tomorrow_Cup_Qualifier1.csproj.CopyComplete
+F:\Coding-Tomorrow-Cup\Coding_Tomorrow_Cup_Qualifier1\Coding_Tomorrow_Cup_Qualifier1\bin\Debug\Newtonsoft.Json.pdb
