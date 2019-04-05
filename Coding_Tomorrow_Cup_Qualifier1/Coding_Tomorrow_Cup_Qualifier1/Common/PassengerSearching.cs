@@ -16,7 +16,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1.Common
             for (int i = 1; i < passengers.Count; i++)
             {
                 int passangerDistance = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, passengers[i].Position.PosX, passengers[i].Position.PosY, cars[0]).ToPositions().Count;
-                if (nearestPassangerDistance > passangerDistance)
+                if (nearestPassangerDistance > passangerDistance /*&& nearestPassangerDistance != 2*/)
                 {
                     nearestPassenger = passengers[i];
                 }
