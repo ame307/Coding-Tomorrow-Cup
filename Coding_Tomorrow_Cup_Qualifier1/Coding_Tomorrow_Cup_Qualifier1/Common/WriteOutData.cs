@@ -34,7 +34,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
         }
 
-        public string Response(Protocol p, string json)
+        public string Response(Protocol p, FirstMessage fm, TickProcessor tp, string json)
         {
             Console.WriteLine("Elküldött parancs: {0}", json);
             string response = p.MessageSender(json);
