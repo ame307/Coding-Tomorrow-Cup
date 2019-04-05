@@ -42,9 +42,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 gameid = tp.GetGameId();
                 tick = tp.GetTick();
                 cars = tp.GetCars();
+                pedestrians = tp.GetPedestrians();
                 passengers = tp.GetPassengers();
                 messages = tp.GetMessages();
-
+                
                 Console.WriteLine(tick);
 
                 if (countofRemovedCommands >= countofCommands - 1 || countofCommands == 0)
@@ -56,7 +57,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         PassengerSearching passengerSearching = new PassengerSearching();
                         nearestPassenger = passengerSearching.Searching(path, cars, passengers, nearestPassenger);
                         wod.GetNearestPassangerPosition(cars, nearestPassenger);
-
+                        //path.ChangeMap(cars, pedestrians);
                         commands = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToCommands();
                         routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToPositions();
 
