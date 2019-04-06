@@ -231,7 +231,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return positions;
         }
 
-        public List<string> ToCommands()
+        public string ToCommand()
         {
             List<string> directions = new List<string>();
             Direction direction = new Direction();
