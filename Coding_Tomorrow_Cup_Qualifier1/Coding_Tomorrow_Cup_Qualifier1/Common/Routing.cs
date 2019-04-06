@@ -298,7 +298,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
             commands.Add("ACCELERATION");
 
-            int speed = 1;
             for (int i = 0; i < directions.Count - 1; i++)
             {
                 //skip no route hack
