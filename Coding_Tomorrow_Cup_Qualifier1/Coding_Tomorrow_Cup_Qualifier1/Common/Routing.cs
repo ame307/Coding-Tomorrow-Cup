@@ -34,9 +34,13 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         {
             set { cars = value; }
         }
-
-
-
+		
+		private List<Pedestrian> pedestrians
+		
+		public List<Pedestrian> Pedestrians
+		{
+			set { pedestrians = value; }
+		}
 
         private static string[] defaultmap = new string[]
             {
