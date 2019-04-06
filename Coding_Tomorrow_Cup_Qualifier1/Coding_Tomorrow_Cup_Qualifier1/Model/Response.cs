@@ -25,7 +25,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Tick = tick;
             CarId = carId;
             Command = command;
-        }  
+        }
         public static List<string> GetResponseFromDirections(List<string> legrovidebbut)
         {
             List<string> responses = new List<string>();
@@ -38,7 +38,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 StringBuilder sb = new StringBuilder(valami);
                 for (int j = 0; j < sb.Length; j++)
                 {
-                    if(sb[i].Equals(@"\"))
+                    if (sb[i].Equals(@"\"))
                     {
                         sb[i] = '\0';
                     }
@@ -47,6 +47,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 responses.Add(valami);
             }
             return responses;
+        }
+        public string StringFromObject()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

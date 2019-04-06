@@ -13,16 +13,17 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     class Program
     {
+        static WriteOutData wod = new WriteOutData();
         static void Main(string[] args)
         {
             #region Declarations
             Protocol p = new Protocol();
             FirstMessage fm = FirstMessage.Firstmessage();
             TickProcessor tp = new TickProcessor(p.FirstMessageSender(fm));
+            TickProcessor newTp;
 
-            WriteOutData wod = new WriteOutData();
+
             List<string> messages;
-            List<string> commands = new List<string>();
 
             List<Car> cars;
             List<Pedestrian> pedestrians = new List<Pedestrian>();
@@ -35,6 +36,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             int countofRemovedCommands = 0;
             int countofCommands = 0;
             bool IsPassengerSearch = true;
+            string command = "";
             #endregion
 
             do
@@ -45,7 +47,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 pedestrians = tp.GetPedestrians();
                 passengers = tp.GetPassengers();
                 messages = tp.GetMessages();
-                
+
                 Console.WriteLine(tick);
 
                 if (countofRemovedCommands >= countofCommands - 1 || countofCommands == 0)
@@ -58,12 +60,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                         nearestPassenger = passengerSearching.Searching(path, cars, passengers, nearestPassenger);
                         wod.GetNearestPassangerPosition(cars, nearestPassenger);
                         //path.ChangeMap(cars, pedestrians);
-                        commands = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToCommands();
+                        command = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToCommand();
                         routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToPositions();
-
-                        countofCommands = commands.Count();
-
-                        wod.WriteOutCommands(commands);
+                        wod.WriteOutCommands(command);
                         wod.WriteOutRoutePositions(routePositions);
 
                         IsPassengerSearch = false;
@@ -71,38 +70,26 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     else
                     {
                         wod.GetPathandEndPoint(cars, nearestPassenger);
-
-                        commands = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.DestinyPosition.PosX, nearestPassenger.DestinyPosition.PosY, cars[0]).ToCommands();
+                        command = (path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.DestinyPosition.PosX, nearestPassenger.DestinyPosition.PosY, cars[0]).ToCommand());
                         routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToPositions();
-
-                        countofCommands = commands.Count();
-
-                        wod.WriteOutCommands(commands);
+                        wod.WriteOutCommands(command);
                         wod.WriteOutRoutePositions(routePositions);
 
                         IsPassengerSearch = true;
                     }
-
-                    var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \"" + commands[0] + "\"}";
-
-                    string response = wod.Response(p, fm, tp, json);
-                    tp = new TickProcessor(response);
-                    commands.RemoveAt(0);
-                    countofRemovedCommands = 0;
+                    var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \"" + command + "\"}";
+                    string responseStr = wod.Response(p, json);
+                    tp = new TickProcessor(responseStr);
                 }
                 else
                 {
-                    var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \"" + commands[0] + "\"}";
-
-                    string response = wod.Response(p, fm, tp, json);
-                    tp = new TickProcessor(response);
-                    commands.RemoveAt(0);
-                    countofRemovedCommands++;
+                    var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \"" + command + "\"}";
+                    string responseStr = wod.Response(p, json);
+                    tp = new TickProcessor(responseStr);
                 }
             } while (messages.Count == 0);
-
             p.Close();
-
+            Console.ReadKey();
         }
     }
 }

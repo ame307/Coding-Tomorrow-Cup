@@ -16,13 +16,10 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
         }
 
-        public void WriteOutCommands(List<string> list)
+        public void WriteOutCommands(string cmd)
         {
-            Console.WriteLine("\n\nÚtvonal utasítások:");
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine(list[i]);
-            }
+            Console.WriteLine("\n\nÚtvonal utasítás: {0}",cmd);
+            
         }
 
         public void WriteOutRoutePositions(List<Pos> routePositions)
@@ -34,7 +31,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
         }
 
-        public string Response(Protocol p, FirstMessage fm, TickProcessor tp, string json)
+        public string Response(Protocol p, string json)
         {
             Console.WriteLine("Elküldött parancs: {0}", json);
             string response = p.MessageSender(json);

@@ -283,6 +283,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             directions = CountForwards(directions);
             string actualDirection = GetCarDirection();
             string startDirection = directions[0];
+            directions.RemoveAt(0);
             List<string> commands = TurnToStartDirection(actualDirection, startDirection);
             int speed = this.myCar.Speed;
             int hp = this.myCar.Life;
@@ -295,8 +296,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 if (directions[0] != "LEFT" && directions[0] != "RIGHT")
                 {
                     int n = Convert.ToInt32(directions[0]) - 2;
-                    string next = directions[1];
-                    string next2 = directions[2];
+                    /*string next = directions[1];
+                    string next2 = directions[2];*/
 
                     command = SpeedAcceleration(speed, n);
                     if (command == null)
