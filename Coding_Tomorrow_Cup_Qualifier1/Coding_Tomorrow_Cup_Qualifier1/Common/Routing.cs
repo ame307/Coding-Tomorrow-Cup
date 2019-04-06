@@ -21,6 +21,23 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return instance;
         }
 
+        private Car myCar;
+
+        public Car MyCar
+        {
+            set { myCar = value; }
+        }
+
+        private List<Car> cars;
+
+        public List<Car> Cars
+        {
+            set { cars = value; }
+        }
+
+
+
+
         private static string[] defaultmap = new string[]
             {
                 "GPSSPGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGPSSPG",
@@ -86,11 +103,11 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             };
         private static string[] map = defaultmap;
         private List<Location> route;
-        private Car car;
+        
 
         public Routing FindRoute(int StartX, int StartY, int TargetX, int TargetY, Car car)
         {
-            this.car = car;
+            this.myCar = car;
             Location current = null;
             var start = new Location { X = StartX, Y = StartY };
             var target = new Location { X = TargetX, Y = TargetY };
@@ -257,16 +274,58 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     i++;
                 }
             }
-            return CreateCommands(directions);
+            return CreateCommand(directions);
         }
 
-        private List<string> CreateCommands(List<string> directions)
+        private string CreateCommand(List<string> directions)
+        {
+            
+            directions = CountForwards(directions);
+            string actualDirection = GetCarDirection();
+            string startDirection = directions[0];
+            string command="";
+
+            //FELTÉTELEK
+           
+
+            return command;
+        }
+
+        private List<string> TurnToStartDirection(string actualDirecton, string startDirectino)
         {
             List<string> commands = new List<string>();
-            directions = CountForwards(directions);
+
+            if (actualDirecton == "SOUTH" && startDirectino == "NORTH" ||
+                actualDirecton == "NORTH" && startDirectino == "SOUTH" ||
+                actualDirecton == "EAST" && startDirectino == "WEST" ||
+                actualDirecton == "WEST" && startDirectino == "EAST")
+            {
+                commands.Add("CAR_INDEX_LEFT");
+                commands.Add("CAR_INDEX_LEFT");
+            }
+            else if (actualDirecton == "SOUTH" && startDirectino == "WEST" ||
+                     actualDirecton == "WEST" && startDirectino == "NORTH" ||
+                     actualDirecton == "NORTH" && startDirectino == "EAST" ||
+                     actualDirecton == "EAST" && startDirectino == "SOUTH")
+            {
+                commands.Add("CAR_INDEX_RIGHT");
+            }
+            else if (actualDirecton == "SOUTH" && startDirectino == "EAST" ||
+                     actualDirecton == "EAST" && startDirectino == "NORTH" ||
+                     actualDirecton == "NORTH" && startDirectino == "WEST" ||
+                     actualDirecton == "WEST" && startDirectino == "SOUTH")
+            {
+                commands.Add("CAR_INDEX_LEFT");
+            }
+
+            return commands;
+        }
+
+        private string GetCarDirection()
+        {
             string direction = "";
 
-            switch (this.car.Direction)
+            switch (this.myCar.Direction)
             {
                 case "UP": direction = global::Direction.NORTH.ToString(); break;
                 case "DOWN": direction = global::Direction.SOUTH.ToString(); break;
@@ -274,116 +333,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 case "RIGHT": direction = global::Direction.EAST.ToString(); break;
             }
 
-            if (direction == "SOUTH" && directions[0] == "NORTH" ||
-                direction == "NORTH" && directions[0] == "SOUTH" ||
-                direction == "EAST" && directions[0] == "WEST" ||
-                direction == "WEST" && directions[0] == "EAST")
-            {
-                commands.Add("CAR_INDEX_LEFT");
-                commands.Add("CAR_INDEX_LEFT");
-            }
-            else if (direction == "SOUTH" && directions[0] == "WEST" ||
-                     direction == "WEST" && directions[0] == "NORTH" ||
-                     direction == "NORTH" && directions[0] == "EAST" ||
-                     direction == "EAST" && directions[0] == "SOUTH")
-            {
-                commands.Add("CAR_INDEX_RIGHT");
-            }
-            else if (direction == "SOUTH" && directions[0] == "EAST" ||
-                     direction == "EAST" && directions[0] == "NORTH" ||
-                     direction == "NORTH" && directions[0] == "WEST" ||
-                     direction == "WEST" && directions[0] == "SOUTH")
-            {
-                commands.Add("CAR_INDEX_LEFT");
-            }
-            commands.Add("ACCELERATION");
-
-            for (int i = 0; i < directions.Count - 1; i++)
-            {
-                //skip no route hack
-                if (directions.Count < 2)
-                {
-
-                }
-                else if (directions[i + 1] == "LEFT")
-                {
-                    commands.Add("DECELERATION");
-                    commands.Add("CAR_INDEX_LEFT");
-                    commands.Add("ACCELERATION");
-                }
-                else if (directions[i + 1] == "RIGHT")
-                {
-                    commands.Add("DECELERATION");
-                    commands.Add("CAR_INDEX_RIGHT");
-                    commands.Add("ACCELERATION");
-                }
-                else
-                {
-                    if (directions.Count > i + 1)
-                    {
-                        int n = Convert.ToInt32(directions[i + 1]);
-                        if (n <= 4)
-                        {
-                            for (int j = 0; j < n - 1; j++)
-                            {
-                                commands.Add("NO_OP");
-                            }
-                        }
-                        else if (n > 4 && n <= 13)
-                        {
-                            commands.Add("ACCELERATION");
-                            speed = 2;
-                            for (int j = 0; j < ((n - 4) / 2); j++)
-                            {
-                                commands.Add("NO_OP");
-                            }
-                            commands.Add("DECELERATION");
-                            if (((Convert.ToInt32(directions[i + 1]) - 4) % 2) == 1)
-                            {
-                                commands.Add("NO_OP");
-                            }
-                        }
-                        else if (n > 13)
-                        {
-                            commands.Add("ACCELERATION");
-                            commands.Add("ACCELERATION");
-                            speed = 3;
-
-                            int x = n - 14;
-                            for (int j = 0; j < (x / 3) + 1; j++)
-                            {
-                                commands.Add("NO_OP");
-                            }
-
-                            if (x % 3 == 0)
-                            {
-                                commands.Add("DECELERATION");
-                                commands.Add("DECELERATION");
-                                commands.Add("NO_OP");
-                                commands.Add("NO_OP");
-                            }
-                            else if (x % 3 == 1)
-                            {
-                                commands.Add("DECELERATION");
-                                commands.Add("NO_OP");
-                                commands.Add("DECELERATION");
-                                commands.Add("NO_OP");
-                            }
-                            else if (x % 3 == 2)
-                            {
-                                commands.Add("NO_OP");
-                                commands.Add("DECELERATION");
-                                commands.Add("DECELERATION");
-                                commands.Add("NO_OP");
-                            }
-                        }
-                    }
-                }
-            }
-
-            commands.Add("DECELERATION");
-
-            return commands;
+            return direction;
         }
 
         private List<string> CountForwards(List<string> directions)
