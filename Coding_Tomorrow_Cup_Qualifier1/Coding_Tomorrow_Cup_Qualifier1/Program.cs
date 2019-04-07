@@ -13,29 +13,27 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     class Program
     {
-        static WriteOutData wod = new WriteOutData();
         static void Main(string[] args)
         {
             #region Declarations
             Protocol p = new Protocol();
             FirstMessage fm = FirstMessage.Firstmessage();
             TickProcessor tp = new TickProcessor(p.FirstMessageSender(fm));
-            TickProcessor newTp;
-
 
             List<string> messages;
-
-            List<Car> cars;
+            List<Car> cars = new List<Car>();
             List<Pedestrian> pedestrians = new List<Pedestrian>();
-            List<Passenger> passengers;
+            List<Passenger> passengers = new List<Passenger>();
+            List<Pos> routePositions = new List<Pos>();
             Passenger nearestPassenger = new Passenger();
             Routing path = Routing.GetInstance();
-            List<Pos> routePositions = new List<Pos>();
+            Pos destinyPosition = new Pos(0,0);
+            Car myCar;
             int gameid;
             int tick;
-            int countofRemovedCommands = 0;
-            int countofCommands = 0;
-            bool IsPassengerSearch = true;
+            int n;
+            bool isPassengerSearch = true;
+            bool isDestinySearch = false; 
             string command = "";
             #endregion
 
@@ -43,52 +41,42 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 gameid = tp.GetGameId();
                 tick = tp.GetTick();
-                cars = tp.GetCars();
                 pedestrians = tp.GetPedestrians();
                 passengers = tp.GetPassengers();
                 messages = tp.GetMessages();
+                cars = tp.GetCars();
+                myCar = cars[0];
+                cars.RemoveAt(0);
 
                 Console.WriteLine(tick);
 
-                if (countofRemovedCommands >= countofCommands - 1 || countofCommands == 0)
+                if (isPassengerSearch)
                 {
-                    wod.WriteOutMessages(messages);
-
-                    if (IsPassengerSearch)
-                    {
-                        PassengerSearching passengerSearching = new PassengerSearching();
-                        nearestPassenger = passengerSearching.Searching(path, cars, passengers, nearestPassenger);
-                        wod.GetNearestPassangerPosition(cars, nearestPassenger);
-                        //path.ChangeMap(cars, pedestrians);
-                        command = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToCommand();
-                        routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToPositions();
-                        wod.WriteOutCommands(command);
-                        wod.WriteOutRoutePositions(routePositions);
-
-                        IsPassengerSearch = false;
-                    }
-                    else
-                    {
-                        wod.GetPathandEndPoint(cars, nearestPassenger);
-                        command = (path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.DestinyPosition.PosX, nearestPassenger.DestinyPosition.PosY, cars[0]).ToCommand());
-                        routePositions = path.FindRoute(cars[0].Position.PosX, cars[0].Position.PosY, nearestPassenger.Position.PosX, nearestPassenger.Position.PosY, cars[0]).ToPositions();
-                        wod.WriteOutCommands(command);
-                        wod.WriteOutRoutePositions(routePositions);
-
-                        IsPassengerSearch = true;
-                    }
-                    var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \"" + command + "\"}";
-                    string responseStr = wod.Response(p, json);
-                    tp = new TickProcessor(responseStr);
+                    nearestPassenger = PassengerSearching.Searching(path, myCar, passengers, nearestPassenger);
+                    destinyPosition = nearestPassenger.Position;
+                    routePositions = path.FindRoute(myCar.Position.PosX, myCar.Position.PosY, destinyPosition.PosX, destinyPosition.PosY, myCar).ToPositions();
+                    WriteOutData.GetNearestPassangerPosition(myCar, nearestPassenger);
+                    WriteOutData.WriteOutRoutePositions(routePositions);
                 }
                 else
                 {
-                    var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + cars[0].Id + "},\"command\": \"" + command + "\"}";
-                    string responseStr = wod.Response(p, json);
-                    tp = new TickProcessor(responseStr);
+                    destinyPosition = nearestPassenger.DestinyPosition;
+                    routePositions = path.FindRoute(myCar.Position.PosX, myCar.Position.PosY, destinyPosition.PosX, destinyPosition.PosY, myCar).ToPositions();
+                    WriteOutData.GetPathandEndPoint(myCar, destinyPosition);
+                    WriteOutData.WriteOutRoutePositions(routePositions);
                 }
+
+                command = path.FindRoute(myCar.Position.PosX, myCar.Position.PosY, destinyPosition.PosX, destinyPosition.PosY, myCar).ToCommand();
+                WriteOutData.WriteOutCommands(command);
+
+                var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + myCar.Id + "},\"command\": \"" + command + "\"}";
+                string responseStr = WriteOutData.Response(p, json);
+                tp = new TickProcessor(responseStr);
+
             } while (messages.Count == 0);
+
             p.Close();
+
             Console.ReadKey();
         }
     }
