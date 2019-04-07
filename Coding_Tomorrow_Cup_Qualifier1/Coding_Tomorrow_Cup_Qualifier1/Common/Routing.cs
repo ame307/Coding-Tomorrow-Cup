@@ -345,7 +345,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
             else
             {
-                return Command.GO_LEFT.ToString();
+                return Command.GO_RIGHT.ToString();
             }
         }
 

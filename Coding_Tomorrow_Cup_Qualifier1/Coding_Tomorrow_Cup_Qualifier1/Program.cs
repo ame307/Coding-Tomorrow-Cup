@@ -31,7 +31,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Car myCar;
             int gameid;
             int tick;
-            int n;
+            int passengerPathLength = 0;
+            int destinyPathLength = 0;
             bool isPassengerSearch = true;
             bool isDestinySearch = false; 
             string command = "";
@@ -55,19 +56,45 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     nearestPassenger = PassengerSearching.Searching(path, myCar, passengers, nearestPassenger);
                     destinyPosition = nearestPassenger.Position;
                     routePositions = path.FindRoute(myCar.Position.PosX, myCar.Position.PosY, destinyPosition.PosX, destinyPosition.PosY, myCar).ToPositions();
+                    passengerPathLength = routePositions.Count();
                     WriteOutData.GetNearestPassangerPosition(myCar, nearestPassenger);
                     WriteOutData.WriteOutRoutePositions(routePositions);
+
+                    isPassengerSearch = false;
                 }
-                else
+                else if(isDestinySearch)
                 {
                     destinyPosition = nearestPassenger.DestinyPosition;
                     routePositions = path.FindRoute(myCar.Position.PosX, myCar.Position.PosY, destinyPosition.PosX, destinyPosition.PosY, myCar).ToPositions();
+                    destinyPathLength = routePositions.Count();
                     WriteOutData.GetPathandEndPoint(myCar, destinyPosition);
                     WriteOutData.WriteOutRoutePositions(routePositions);
+
+                    isDestinySearch = false;
                 }
 
                 command = path.FindRoute(myCar.Position.PosX, myCar.Position.PosY, destinyPosition.PosX, destinyPosition.PosY, myCar).ToCommand();
                 WriteOutData.WriteOutCommands(command);
+
+                if(passengerPathLength > 0)
+                {
+                    passengerPathLength--;
+                }
+                else
+                {
+                    destinyPathLength--;
+                }
+
+                if (passengerPathLength == 0)
+                {
+                    passengerPathLength = -1;
+                    isDestinySearch = true;
+                }
+                else if (destinyPathLength == 0)
+                {
+                    destinyPathLength = -1;
+                    isPassengerSearch = true;
+                }
 
                 var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + myCar.Id + "},\"command\": \"" + command + "\"}";
                 string responseStr = WriteOutData.Response(p, json);
