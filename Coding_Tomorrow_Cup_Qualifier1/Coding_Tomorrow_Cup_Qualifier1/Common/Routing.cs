@@ -347,6 +347,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 return Command.GO_RIGHT.ToString();
             }
+            return null;
         }
 
         private string TurnAtStart(ref List<string> turnCommands)
