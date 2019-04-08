@@ -284,50 +284,96 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             string actualDirection = GetCarDirection();
             string startDirection = directions[0];
             directions.RemoveAt(0);
-            List<string> commands = TurnToStartDirection(actualDirection, startDirection);
+            List<string> turnCommands = new List<string>();
             int speed = this.myCar.Speed;
             int hp = this.myCar.Life;
             string command = null;
+            bool DidWeDoTheStartTurn = false;
 
-
-            command = TurnAtStart(ref commands);
-            if (command == null)
+            if(!DidWeDoTheStartTurn)
             {
-                if (directions[0] != "LEFT" && directions[0] != "RIGHT")
-                {
-                    int n = Convert.ToInt32(directions[0]) - 2;
-                    /*string next = directions[1];
-                    string next2 = directions[2];*/
-
-                    command = SpeedAcceleration(speed, n);
-                    if (command == null)
-                    {
-                        command = SpeedDeceleration(speed, hp, n);
-                        if(command == null)
-                        {
-                            command = Command.NO_OP.ToString();
-                        }
-                    }
-                }
-                else if ((directions[0] == "LEFT" || directions[0] == "RIGHT") && hp - 2 * speed - 1 > 0)
-                {
-                    string direction = directions[0];
-                    command = TurnWithSpeed(direction);
-                }
-                else if ((directions[0] == "LEFT" || directions[0] == "RIGHT") && !(hp - 2 * speed - 1 > 0))
-                {
-                    string direction = directions[0];
-                    command = TurnWithoutSpeed(direction);
-                }
+                turnCommands = TurnToStartDirection(actualDirection, startDirection);
+                DidWeDoTheStartTurn = true;
             }
+
+
+            if(DoWeTurnAtStart(turnCommands))
+            {
+                command = TurnAtStart(ref turnCommands);
+            }
+            else if(DoWeAccelerate())
+            {
+                command = Accelerate();
+            }
+            else if(DoWeDecelerate())
+            {
+                command = Decelerate();
+            }
+            else if(DoWeTurn())
+            {
+                command = Turn("LEFT");
+            }
+            else if(DoWeGivePriority())
+            {
+                command = GivePriority();
+            }
+            else
+            {
+                command = DoNothing();
+            }
+
+            return command;
+            
+        }
+
+        private bool DoWeTurnAtStart(List<string> turnCommands)
+        {
+            if (turnCommands.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private string TurnAtStart(ref List<string> turnCommands)
+        {
+            string command = turnCommands[0];
+            turnCommands.RemoveAt(0);
 
             return command;
         }
 
-
-        private string TurnWithoutSpeed(string direction)
+        private bool DoWeAccelerate()
         {
-            if (direction == "LEFT")
+            return false;
+        }
+
+        private string Accelerate()
+        {
+            return Command.ACCELERATION.ToString();
+        }
+
+        private bool DoWeDecelerate()
+        {
+            return false;
+        }
+
+        private string Decelerate()
+        {
+            return Command.DECELERATION.ToString();
+        }
+
+        private bool DoWeTurn()
+        {
+            return false;
+        }
+
+        private string Turn(string direction)
+        {
+            if(direction == "LEFT")
             {
                 return Command.CAR_INDEX_LEFT.ToString();
             }
@@ -336,78 +382,21 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 return Command.CAR_INDEX_RIGHT.ToString();
             }
         }
-        private string TurnWithSpeed(string direction)
-        {
 
-            if (direction == "LEFT")
-            {
-                return Command.GO_LEFT.ToString();
-            }
-            else
-            {
-                return Command.GO_RIGHT.ToString();
-            }
+        private bool DoWeGivePriority()
+        {
+            return false;
+        }
+
+        private string GivePriority()
+        {
             return null;
         }
 
-        private string TurnAtStart(ref List<string> turnCommands)
+        private string DoNothing()
         {
-            string command = null;
-
-            if (turnCommands.Count != 0)
-            {
-                command = turnCommands[0];
-                turnCommands.RemoveAt(0);
-            }
-
-            return command;
+            return Command.NO_OP.ToString();
         }
-        private string SpeedAcceleration(int speed, int n)
-        {
-            string command = null;
-
-            if (speed < 3)
-            {
-                if (speed == 0)
-                {
-                    command = Command.ACCELERATION.ToString();
-                }
-                else if (speed == 1 && n > 4)
-                {
-                    command = Command.ACCELERATION.ToString();
-                }
-                else if (speed == 2 && n > 13)
-                {
-                    command = Command.ACCELERATION.ToString();
-                }
-            }
-
-            return command;
-        }
-
-        private string SpeedDeceleration(int speed, int hp, int n)
-        {
-            string command = null;
-
-            if (speed > 0)
-            {
-                if (speed == 3 && n < 5)
-                {
-                    command = Command.DECELERATION.ToString();
-                }
-                else if (speed == 2 && n < 2)
-                {
-                    command = Command.DECELERATION.ToString();
-                }
-                else if (speed == 1 && !(hp - 2 * speed - 1 > 0))
-                {
-                    command = Command.DECELERATION.ToString();
-                }
-            }
-
-            return command;
-        }
-
 
         private List<string> TurnToStartDirection(string actualDirecton, string startDirection)
         {
