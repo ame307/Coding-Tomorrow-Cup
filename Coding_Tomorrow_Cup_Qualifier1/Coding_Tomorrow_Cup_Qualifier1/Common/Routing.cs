@@ -10,6 +10,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     class Routing
     {
+        #region NemKell
         private static Routing instance;
         public static Routing GetInstance()
         {
@@ -276,7 +277,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
             return CreateCommand(directions);
         }
-
+        #endregion
         private string CreateCommand(List<string> directions)
         {
 
@@ -305,13 +306,13 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 command = Accelerate();
             }
-            else if (DoWeDecelerate())
+            else if (DoWeDecelerate(directions[0], speed))
             {
                 command = Decelerate();
             }
-            else if (DoWeTurn())
+            else if (DoWeTurn(directions))
             {
-                command = Turn("LEFT");
+                command = Turn(directions[0]);
             }
             else if (DoWeGivePriority())
             {
@@ -355,7 +356,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     return true;
                 else if (street >= 4 && speed == 1)
                     return true;
-                else if (street >= 6 && speed == 2)
+                else if (street >= 8 && speed == 2)
                     return true;
             }
             return false;
@@ -366,8 +367,20 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return Command.ACCELERATION.ToString();
         }
 
-        private bool DoWeDecelerate()
+        private bool DoWeDecelerate(string forward, int speed)
         {
+            int street;
+            if (int.TryParse(forward, out street))
+            {
+                if (speed == 0)
+                    return false;
+                else if (street == 1 && speed == 1)
+                    return true;
+                else if (street == 3 && speed == 2)
+                    return true;
+                else if (street == 6 && speed == 3)
+                    return true;
+            }
             return false;
         }
 
@@ -376,7 +389,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return Command.DECELERATION.ToString();
         }
 
-        private bool DoWeTurn()
+        private bool DoWeTurn(List<string> directions)
         {
             return false;
         }
