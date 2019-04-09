@@ -301,7 +301,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 command = TurnAtStart(ref turnCommands);
             }
-            else if (DoWeAccelerate(directions[0],speed))
+            else if (DoWeAccelerate(directions[0], speed))
             {
                 command = Accelerate();
             }
@@ -346,12 +346,16 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return command;
         }
 
-        private bool DoWeAccelerate(string command, int speed)
+        private bool DoWeAccelerate(string forward, int speed)
         {
             int street;
-            if (int.TryParse(command, out street))
+            if (int.TryParse(forward, out street))
             {
-                if (street >= 2 && speed < 3)
+                if (street >= 0 && speed == 0)
+                    return true;
+                else if (street >= 4 && speed == 1)
+                    return true;
+                else if (street >= 6 && speed == 2)
                     return true;
             }
             return false;
