@@ -53,7 +53,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 Car temp = new Car((int)jsonCars[i]["id"], new Pos((int)jsonCars[i]["pos"]["x"], (int)jsonCars[i]["pos"]["y"]), (int)jsonCars[i]["life"],
                 (int)jsonCars[i]["speed"], (string)jsonCars[i]["direction"], (string)jsonCars[i]["command"],
-                (int)jsonCars[i]["transported"]);//(int)jsonCars[i]["passenger_id"]);
+                (int)jsonCars[i]["transported"]);
 
                 cars.Add(temp);                
             }
@@ -85,7 +85,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             for (int i = 0; i < jsonPassengers.Count; i++)
             {
                 Passenger temp = new Passenger((int)jsonPassengers[i]["id"], new Pos((int)jsonPassengers[i]["pos"]["x"], (int)jsonPassengers[i]["pos"]["y"]),
-                new Pos((int)jsonPassengers[i]["dest_pos"]["x"], (int)jsonPassengers[i]["dest_pos"]["y"]));//,(int)jsonPassengers[i]["car_id"]);
+                new Pos((int)jsonPassengers[i]["dest_pos"]["x"], (int)jsonPassengers[i]["dest_pos"]["y"]));
 
                 passengers.Add(temp);
             }

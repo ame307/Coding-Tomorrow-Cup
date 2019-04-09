@@ -55,7 +55,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                     nearestPassenger = PassengerSearching.Searching(path, myCar, passengers, nearestPassenger);
                     destinyPosition = nearestPassenger.Position;
                     routePositions = path.FindRoute(myCar.Position.PosX, myCar.Position.PosY, destinyPosition.PosX, destinyPosition.PosY, myCar).ToPositions();
-                    passengerPathLength = routePositions.Count();
+                    path.SetTurnCommands();
                     WriteOutData.GetNearestPassangerPosition(myCar, nearestPassenger);
                     WriteOutData.WriteOutRoutePositions(routePositions);
 
@@ -68,7 +68,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 {
                     destinyPosition = nearestPassenger.DestinyPosition;
                     routePositions = path.FindRoute(myCar.Position.PosX, myCar.Position.PosY, destinyPosition.PosX, destinyPosition.PosY, myCar).ToPositions();
-                    destinyPathLength = routePositions.Count();
+                    path.SetTurnCommands();
                     WriteOutData.GetPathandEndPoint(myCar, destinyPosition);
                     WriteOutData.WriteOutRoutePositions(routePositions);
 
@@ -81,7 +81,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 var json = "{\"response_id\":{\"game_id\": " + gameid + ",\"tick\": " + tick + ",\"car_id\": " + myCar.Id + "},\"command\": \"" + command + "\"}";
                 string responseStr = WriteOutData.Response(p, json);
                 tp = new TickProcessor(responseStr);
-
             } while (messages.Count == 0);
 
             p.Close();

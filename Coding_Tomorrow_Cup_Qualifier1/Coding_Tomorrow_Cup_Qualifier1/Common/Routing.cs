@@ -10,7 +10,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 {
     class Routing
     {
-        #region NemKell
         private static Routing instance;
         public static Routing GetInstance()
         {
@@ -36,8 +35,12 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             set { cars = value; }
         }
 
+        private List<string> turnCommands;
 
-
+        public void SetTurnCommands()
+        {
+            turnCommands = TurnToStartDirection(GetCarDirection(), PathDirection());
+        }
 
         private static string[] defaultmap = new string[]
             {
@@ -161,12 +164,27 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
             while (current != null)
             {
-                route.Add(new Location { X = current.X, Y = current.Y });
+                this.route.Add(new Location { X = current.X, Y = current.Y });
                 current = current.previousLocation;
             }
 
-            route.Reverse();
+            this.route.Reverse();
             return this;
+        }
+
+        private string GetCarDirection()
+        {
+            string direction = null;
+
+            switch (this.myCar.Direction)
+            {
+                case "UP": direction = global::Direction.NORTH.ToString(); break;
+                case "DOWN": direction = global::Direction.SOUTH.ToString(); break;
+                case "LEFT": direction = global::Direction.WEST.ToString(); break;
+                case "RIGHT": direction = global::Direction.EAST.ToString(); break;
+            }
+
+            return direction;
         }
 
         private List<Location> GetWalkableAdjacentSquares(int x, int y, string[] map)
@@ -222,8 +240,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public List<Pos> ToPositions()
         {
             List<Pos> positions = new List<Pos>();
-            for (int i = 0; i < route.Count; i++)
-                positions.Add(new Pos(route[i].X, route[i].Y));
+            for (int i = 0; i < this.route.Count; i++)
+                positions.Add(new Pos(this.route[i].X, this.route[i].Y));
 
             return positions;
         }
@@ -231,42 +249,35 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         public string ToCommand()
         {
             List<string> directions = new List<string>();
-            Direction direction = new Direction();
-
-            if (route.Count == 1) { }
-            else if (route[0].X - route[1].X == 0)
-                direction = route[0].Y < route[1].Y ? Direction.SOUTH : Direction.NORTH;
-            else
-                direction = route[0].X < route[1].X ? Direction.EAST : Direction.WEST;
-            directions.Add(direction.ToString());
+            string direction = PathDirection();
 
             int i = 1;
             while (i < route.Count)
             {
-                if (route[i - 1].X != route[i].X && (direction == Direction.NORTH || direction == Direction.SOUTH))
+                if (this.route[i - 1].X != this.route[i].X && (direction == Direction.NORTH.ToString() || direction == Direction.SOUTH.ToString()))
                 {
-                    if (route[i - 1].X < route[i].X)
+                    if (this.route[i - 1].X < this.route[i].X)
                     {
-                        directions.Add(direction == Direction.SOUTH ? "LEFT" : "RIGHT");
-                        direction = Direction.EAST;
+                        directions.Add(direction == Direction.SOUTH.ToString() ? "LEFT" : "RIGHT");
+                        direction = Direction.EAST.ToString();
                     }
                     else
                     {
-                        directions.Add(direction == Direction.NORTH ? "LEFT" : "RIGHT");
-                        direction = Direction.WEST;
+                        directions.Add(direction == Direction.NORTH.ToString() ? "LEFT" : "RIGHT");
+                        direction = Direction.WEST.ToString();
                     }
                 }
-                else if (route[i - 1].Y != route[i].Y && (direction == Direction.WEST || direction == Direction.EAST))
+                else if (this.route[i - 1].Y != this.route[i].Y && (direction == Direction.WEST.ToString() || direction == Direction.EAST.ToString()))
                 {
-                    if (route[i - 1].Y < route[i].Y)
+                    if (this.route[i - 1].Y < this.route[i].Y)
                     {
-                        directions.Add(direction == Direction.EAST ? "RIGHT" : "LEFT");
-                        direction = Direction.SOUTH;
+                        directions.Add(direction == Direction.EAST.ToString() ? "RIGHT" : "LEFT");
+                        direction = Direction.SOUTH.ToString();
                     }
                     else
                     {
-                        directions.Add(direction == Direction.WEST ? "RIGHT" : "LEFT");
-                        direction = Direction.NORTH;
+                        directions.Add(direction == Direction.WEST.ToString() ? "RIGHT" : "LEFT");
+                        direction = Direction.NORTH.ToString();
                     }
                 }
                 else
@@ -277,47 +288,49 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
             return CreateCommand(directions);
         }
-        #endregion
+
+        private string PathDirection()
+        {
+            string direction = null;
+
+            if (this.route.Count == 1) { }
+            else if (this.route[0].X - this.route[1].X == 0)
+                direction = this.route[0].Y < this.route[1].Y ? Direction.SOUTH.ToString() : Direction.NORTH.ToString();
+            else
+                direction = this.route[0].X < this.route[1].X ? Direction.EAST.ToString() : Direction.WEST.ToString();
+
+            return direction;
+        }
+
         private string CreateCommand(List<string> directions)
         {
 
             directions = CountForwards(directions);
-            string actualDirection = GetCarDirection();
-            string startDirection = directions[0];
-            directions.RemoveAt(0);
-            List<string> turnCommands = new List<string>();
             int speed = this.myCar.Speed;
             int hp = this.myCar.Life;
             string command = null;
-            bool DidWeDoTheStartTurn = false;
+            int n = 0;
 
-            if (!DidWeDoTheStartTurn)
+            if (DoWeTurnAtStart())
             {
-                turnCommands = TurnToStartDirection(actualDirection, startDirection);
-                DidWeDoTheStartTurn = true;
-            }
-
-
-            if (DoWeTurnAtStart(turnCommands))
-            {
-                command = TurnAtStart(ref turnCommands);
-            }
-            else if (DoWeAccelerate(directions[0], speed))
-            {
-                command = Accelerate();
-            }
-            else if (DoWeDecelerate(directions[0], speed))
-            {
-                command = Decelerate();
-            }
-            else if (DoWeTurn(directions))
-            {
-                command = Turn(directions[0]);
+                command = TurnAtStart();
             }
             else if (DoWeGivePriority())
             {
                 command = GivePriority();
             }
+            else if (DoWeDecelerate(directions[0], speed))
+            {
+                command = Decelerate();
+            }
+            else if (DoWeTurn())
+            {
+                command = Turn("LEFT");
+            }
+            else if (DoWeAccelerate(directions[0],speed))
+            {
+                command = Accelerate();
+            }  
             else
             {
                 command = DoNothing();
@@ -327,9 +340,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
         }
 
-        private bool DoWeTurnAtStart(List<string> turnCommands)
+        private bool DoWeTurnAtStart()
         {
-            if (turnCommands.Count > 0)
+            if (this.turnCommands.Count > 0)
             {
                 return true;
             }
@@ -339,32 +352,22 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
         }
 
-        private string TurnAtStart(ref List<string> turnCommands)
+        private string TurnAtStart()
         {
-            string command = turnCommands[0];
-            turnCommands.RemoveAt(0);
+            string command = this.turnCommands[0];
+            this.turnCommands.RemoveAt(0);
 
             return command;
         }
 
-        private bool DoWeAccelerate(string forward, int speed)
+        private bool DoWeGivePriority()
         {
-            int street;
-            if (int.TryParse(forward, out street))
-            {
-                if (street >= 0 && speed == 0)
-                    return true;
-                else if (street >= 4 && speed == 1)
-                    return true;
-                else if (street >= 8 && speed == 2)
-                    return true;
-            }
             return false;
         }
 
-        private string Accelerate()
+        private string GivePriority()
         {
-            return Command.ACCELERATION.ToString();
+            return null;
         }
 
         private bool DoWeDecelerate(string forward, int speed)
@@ -389,7 +392,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return Command.DECELERATION.ToString();
         }
 
-        private bool DoWeTurn(List<string> directions)
+        private bool DoWeTurn()
         {
             return false;
         }
@@ -406,14 +409,24 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
         }
 
-        private bool DoWeGivePriority()
+        private bool DoWeAccelerate(string forward, int speed)
         {
+            int street;
+            if (int.TryParse(forward, out street))
+            {
+                if (street >= 0 && speed == 0)
+                    return true;
+                else if (street >= 4 && speed == 1)
+                    return true;
+                else if (street >= 6 && speed == 2)
+                    return true;
+            }
             return false;
         }
 
-        private string GivePriority()
+        private string Accelerate()
         {
-            return null;
+            return Command.ACCELERATION.ToString();
         }
 
         private string DoNothing()
@@ -449,21 +462,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
 
             return commands;
-        }
-
-        private string GetCarDirection()
-        {
-            string direction = "";
-
-            switch (this.myCar.Direction)
-            {
-                case "UP": direction = global::Direction.NORTH.ToString(); break;
-                case "DOWN": direction = global::Direction.SOUTH.ToString(); break;
-                case "LEFT": direction = global::Direction.WEST.ToString(); break;
-                case "RIGHT": direction = global::Direction.EAST.ToString(); break;
-            }
-
-            return direction;
         }
 
         public List<string> CountForwards(List<string> directions)
