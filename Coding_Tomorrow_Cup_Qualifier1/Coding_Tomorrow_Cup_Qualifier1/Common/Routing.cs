@@ -290,30 +290,30 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             string command = null;
             bool DidWeDoTheStartTurn = false;
 
-            if(!DidWeDoTheStartTurn)
+            if (!DidWeDoTheStartTurn)
             {
                 turnCommands = TurnToStartDirection(actualDirection, startDirection);
                 DidWeDoTheStartTurn = true;
             }
 
 
-            if(DoWeTurnAtStart(turnCommands))
+            if (DoWeTurnAtStart(turnCommands))
             {
                 command = TurnAtStart(ref turnCommands);
             }
-            else if(DoWeAccelerate())
+            else if (DoWeAccelerate(directions[0],speed))
             {
                 command = Accelerate();
             }
-            else if(DoWeDecelerate())
+            else if (DoWeDecelerate())
             {
                 command = Decelerate();
             }
-            else if(DoWeTurn())
+            else if (DoWeTurn())
             {
                 command = Turn("LEFT");
             }
-            else if(DoWeGivePriority())
+            else if (DoWeGivePriority())
             {
                 command = GivePriority();
             }
@@ -323,7 +323,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             }
 
             return command;
-            
+
         }
 
         private bool DoWeTurnAtStart(List<string> turnCommands)
@@ -346,8 +346,14 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return command;
         }
 
-        private bool DoWeAccelerate()
+        private bool DoWeAccelerate(string command, int speed)
         {
+            int street;
+            if (int.TryParse(command, out street))
+            {
+                if (street >= 2 && speed < 3)
+                    return true;
+            }
             return false;
         }
 
@@ -373,7 +379,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
         private string Turn(string direction)
         {
-            if(direction == "LEFT")
+            if (direction == "LEFT")
             {
                 return Command.CAR_INDEX_LEFT.ToString();
             }
