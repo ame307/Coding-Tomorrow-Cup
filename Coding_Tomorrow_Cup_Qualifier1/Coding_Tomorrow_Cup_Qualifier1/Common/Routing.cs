@@ -308,8 +308,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             directions = CountForwards(directions);
             int speed = this.myCar.Speed;
             int hp = this.myCar.Life;
-            string command = null;
-            int n = 0;
+            string command;
+            string direction;
 
             if (DoWeTurnAtStart())
             {
@@ -323,9 +323,9 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 command = Decelerate();
             }
-            else if (DoWeTurn())
+            else if (DoWeTurn(directions, speed, out direction))
             {
-                command = Turn("LEFT");
+                command = Turn(direction);
             }
             else if (DoWeAccelerate(directions[0],speed))
             {
@@ -369,8 +369,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         {
             return null;
         }
-        
-        //Talán jó
+
         private bool DoWeDecelerate(string forward, int speed)
         {
             int street;
@@ -385,7 +384,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 else if (street <= 6 && speed == 3)
                     return true;
             }
-            return false;
+             return false;
+            
         }
 
         private string Decelerate()
@@ -393,9 +393,27 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return Command.DECELERATION.ToString();
         }
 
-        private bool DoWeTurn()
+        private bool DoWeTurn(List<string> directions, int speed, out string direction)
         {
-            return false;
+            int street ;
+            if(int.TryParse(directions[0], out street))
+            {
+                if(speed == 1 && street - 1 == 1 && directions.Count > 1)
+                {
+                    direction = directions[1];
+                    return true;
+                }
+                else
+                {
+                    direction = null;
+                    return false;
+                }
+            }
+            else 
+            {
+                direction = directions[0];
+                return true;
+            }
         }
 
         private string Turn(string direction)

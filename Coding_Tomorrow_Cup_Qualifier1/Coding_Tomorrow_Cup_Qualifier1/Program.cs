@@ -29,8 +29,6 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             Car myCar;
             int gameid;
             int tick;
-            int passengerPathLength = 0;
-            int destinyPathLength = 0;
             bool isPassengerSearch = true;
             bool isDestinySearch = false; 
             string command = "";
