@@ -369,7 +369,8 @@ namespace Coding_Tomorrow_Cup_Qualifier1
         {
             return null;
         }
-
+        
+        //Talán jó
         private bool DoWeDecelerate(string forward, int speed)
         {
             int street;
@@ -377,11 +378,11 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             {
                 if (speed == 0)
                     return false;
-                else if (street == 1 && speed == 1)
+                else if (street <= 2 && speed == 1)
                     return true;
-                else if (street == 3 && speed == 2)
+                else if (street <= 4 && speed == 2)
                     return true;
-                else if (street == 6 && speed == 3)
+                else if (street <= 6 && speed == 3)
                     return true;
             }
             return false;
