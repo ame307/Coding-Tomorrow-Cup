@@ -134,7 +134,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 if (closedList.FirstOrDefault(l => l.X == target.X && l.Y == target.Y) != null)
                     break;
 
-                var adjacentSquares = GetWalkableAdjacentSquares(current.X, current.Y, map);
+                var adjacentSquares = GetWalkableAdjacentSquares(current.X, current.Y, map, car);
                 currentDistanceFromStart++;
 
                 foreach (var adjacentSquare in adjacentSquares)
@@ -144,6 +144,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
 
                     if (openList.FirstOrDefault(l => l.X == adjacentSquare.X && l.Y == adjacentSquare.Y) == null)
                     {
+
                         adjacentSquare.distanceFromStart = currentDistanceFromStart;
                         adjacentSquare.distanceFromTarget = ComputeEndDistance(adjacentSquare.X, adjacentSquare.Y, target.X, target.Y);
                         adjacentSquare.distanceScore = adjacentSquare.distanceFromStart + adjacentSquare.distanceFromTarget;
@@ -187,7 +188,7 @@ namespace Coding_Tomorrow_Cup_Qualifier1
             return direction;
         }
 
-        private List<Location> GetWalkableAdjacentSquares(int x, int y, string[] map)
+        private List<Location> GetWalkableAdjacentSquares(int x, int y, string[] map, Car car)
         {
             var proposedLocations = new List<Location>()
             {
@@ -205,6 +206,40 @@ namespace Coding_Tomorrow_Cup_Qualifier1
                 proposedLocations[2] = new Location { X = 59, Y = y };
             if (proposedLocations[3].X == 60)
                 proposedLocations[3] = new Location { X = 0, Y = y };
+
+            Pos jarda = new Pos(0, 0);
+            Pos jarda2 = new Pos(0, 0);
+            Pos korforgalom = new Pos(0, 0);
+
+            //switch (car.Direction)
+            //{
+            //    case "UP":
+            //        jarda.PosX = car.Position.PosX + 1; jarda.PosY = car.Position.PosY;
+            //        jarda2.PosX = car.Position.PosX + 1; jarda2.PosY = car.Position.PosY + 1;
+            //        korforgalom.PosX = car.Position.PosX - 1; jarda.PosY = car.Position.PosY;
+            //        break;
+            //    case "DOWN":
+            //        jarda.PosX = car.Position.PosX - 1; jarda.PosY = car.Position.PosY;
+            //        jarda2.PosX = car.Position.PosX - 1; jarda2.PosY = car.Position.PosY - 1;
+            //        korforgalom.PosX = car.Position.PosX + 1; jarda.PosY = car.Position.PosY;
+            //        break;
+            //    case "LEFT":
+            //        jarda.PosX = car.Position.PosX; jarda.PosY = car.Position.PosY - 1;
+            //        jarda2.PosX = car.Position.PosX + 1; jarda2.PosY = car.Position.PosY - 1;
+            //        korforgalom.PosX = car.Position.PosX - 1; jarda.PosY = car.Position.PosY;
+            //        break;
+            //    case "RIGHT":
+            //        jarda.PosX = car.Position.PosX; jarda.PosY = car.Position.PosY + 1;
+            //        jarda2.PosX = car.Position.PosX - 1; jarda2.PosY = car.Position.PosY + 1;
+            //        korforgalom.PosX = car.Position.PosX + 1; jarda.PosY = car.Position.PosY;
+            //        break;
+            //}
+
+            //foreach (Location l in proposedLocations)
+            //{
+            //    if ()
+            //}
+
 
             return proposedLocations.Where(l => map[l.Y][l.X] == 'S' || map[l.Y][l.X] == 'Z').ToList();
         }
